@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#123047">
+<title>ميزاني | ميزانك عندنا</title>
+<style>
+:root{--navy:#123047;--teal:#087e8b;--gold:#f3b544;--paper:#f4f7f9;--ink:#1b2933;--muted:#62727d;--line:#dbe4e8;--white:#fff;--green:#1b7b50;--red:#a63838}
+*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:var(--paper);color:var(--ink);line-height:1.65}button,input,select,textarea{font:inherit}button,a{cursor:pointer}a{text-decoration:none}
+.wrap{width:min(1100px,100% - 28px);margin:auto}
+header{background:linear-gradient(125deg,#102b3e,#176071);color:#fff;padding:18px 0 28px}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{font-weight:900;font-size:27px;line-height:1.2}.brand span{color:var(--gold)}.tagline{font-size:12px;color:#d8e9ef}
+.navlinks{display:flex;gap:8px;flex-wrap:wrap}.navbtn{border:1px solid #7faab6;background:transparent;color:white;padding:8px 12px;border-radius:10px;font-weight:bold}.navbtn.active{background:var(--gold);border-color:var(--gold);color:#24333a}
+.hero{padding:28px 0 8px;max-width:800px}.hero h1{font-size:clamp(26px,5vw,42px);line-height:1.25;margin:8px 0}.hero p{color:#dceaf0;margin:8px 0 20px}.search{background:white;border-radius:16px;padding:12px;display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:8px;box-shadow:0 12px 25px #001c2a25}
+input,select,textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;background:white;color:var(--ink);min-width:0}textarea{resize:vertical}
+.btn{border:0;border-radius:10px;padding:11px 15px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:6px}.gold{background:var(--gold);color:#26323a}.primary{background:var(--navy);color:white}.teal{background:var(--teal);color:white}.light{background:#e8f3f5;color:var(--navy)}.danger{background:#f9e9e9;color:var(--red)}.full{width:100%}
+main{padding:22px 0 42px}.tabs{display:flex;gap:8px;overflow:auto;padding:2px 0 12px}.tab{white-space:nowrap;border:1px solid var(--line);border-radius:10px;background:#fff;padding:9px 14px;color:var(--navy);font-weight:bold}.tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.panel{background:#fff;border:1px solid var(--line);border-radius:15px;padding:17px;margin-bottom:16px}.panel h2,.panel h3{margin:0 0 8px;color:var(--navy)}.muted{color:var(--muted);font-size:13px}.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:10px;flex-wrap:wrap;margin:6px 0 14px}.sectionhead h2{margin:0;color:var(--navy)}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.card{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}.visual{height:135px;display:grid;place-items:center;font-size:54px;background:linear-gradient(135deg,#e7f2f4,#fbf2df)}.cardbody{padding:14px}.pill{font-size:12px;border-radius:20px;padding:4px 9px;background:#e8f4f4;color:#08727d;display:inline-block}.card h3{font-size:17px;margin:9px 0 3px}.price{font-weight:900;font-size:18px;color:var(--teal)}.card .btn{width:100%;margin-top:10px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{font-weight:bold;font-size:13px;display:block;margin-bottom:5px}.field.fullrow{grid-column:1/-1}.hidden{display:none!important}.notice{padding:11px 13px;border-radius:10px;background:#fff7df;border:1px solid #f1d88f;color:#634c0b;font-size:13px;margin:10px 0}.success{padding:11px 13px;border-radius:10px;background:#e9f7ef;border:1px solid #b6e2c8;color:#155f3b;font-size:13px;margin:10px 0}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{padding:14px;border:1px solid var(--line);border-radius:12px;background:#f9fbfc}.stat b{display:block;font-size:24px;color:var(--teal)}.stat span{font-size:12px;color:var(--muted)}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}th{background:#f3f7f8;color:var(--navy)}.empty{padding:20px;text-align:center;border:1px dashed var(--line);border-radius:12px;color:var(--muted);background:white}.how{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.how div{padding:13px;background:#f6fafb;border-radius:12px}.how b{color:var(--teal)}footer{background:#0e293a;color:#dce8ed;padding:22px 0;font-size:13px}
+@media(max-width:760px){.search{grid-template-columns:1fr 1fr}.search .btn{grid-column:1/-1}.cards{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.how{grid-template-columns:1fr}.nav{align-items:flex-start}.stats{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.cards{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.field.fullrow{grid-column:auto}.brand{font-size:24px}.wrap{width:calc(100% - 22px)}.stats{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header>
+ <div class="wrap">
+  <div class="nav">
+   <div><div class="brand">ميزاني <span>⚖</span></div><div class="tagline">ميزانك عندنا — دليل الموازين في الجزائر</div></div>
+   <div class="navlinks">
+    <button class="navbtn active" data-page="customer">الزبائن</button>
+    <button class="navbtn" data-page="merchant">فضاء التاجر</button>
+    <button class="navbtn" data-page="admin">الإدارة التجريبية</button>
+   </div>
+  </div>
+  <div class="hero" id="hero">
+   <h1>اعثر على الميزان المناسب لنشاطك</h1>
+   <p>دليل متخصص يربط الزبائن بتجار الموازين في الجزائر. قارن الأنواع وتواصل مع التاجر مباشرة.</p>
+   <div class="search">
+    <input id="q" placeholder="ابحث عن نوع الميزان أو اسمه" aria-label="بحث">
+    <select id="type"><option value="">كل الأنواع</option><option>ميزان إلكتروني</option><option>ميزان تجاري</option><option>ميزان صناعي</option><option>ميزان حساس</option><option>ميزان شاحنات</option></select>
+    <select id="wilaya"><option value="">كل الولايات</option><option>الجزائر</option><option>البليدة</option><option>وهران</option><option>سطيف</option><option>قسنطينة</option></select>
+    <button class="btn gold" id="searchBtn">ابحث</button>
+   </div>
+  </div>
+ </div>
+</header>
+<main class="wrap">
+ <section id="page-customer">
+  <div class="sectionhead"><div><h2>عروض الموازين</h2><div class="muted">عروض نموذجية لتجربة الواجهة — ليست إعلانات حقيقية.</div></div><span class="muted" id="resultCount"></span></div>
+  <div class="cards" id="productCards"></div>
+  <div id="noResults" class="empty hidden">لا توجد نتائج مطابقة. جرّب تغيير البحث أو الولاية.</div>
+  <div class="panel" style="margin-top:18px">
+   <h3>كيف يعمل ميزاني؟</h3>
+   <div class="how"><div><b>1. ابحث</b><br><span class="muted">اختر النوع والولاية.</span></div><div><b>2. قارن</b><br><span class="muted">تعرّف على عرض التاجر.</span></div><div><b>3. تواصل</b><br><span class="muted">اتفق مباشرة مع التاجر.</span></div></div>
+  </div>
+ </section>
+
+ <section id="page-merchant" class="hidden">
+  <div class="panel">
+   <h2>فضاء التاجر</h2>
+   <p>انضم إلى دليل ميزاني واعرض منتجات الموازين التي تبيعها للزبائن في الجزائر.</p>
+   <div class="notice"><b>الاشتراك: 500 دج شهريًا.</b> لا توجد فترة اشتراك مجانية. في هذه النسخة، إرسال الطلب تجريبي ولا يعني تفعيل الاشتراك أو تحصيل المال.</div>
+   <h3 style="margin-top:18px">طلب انضمام تاجر</h3>
+   <form id="merchantForm">
+    <div class="formgrid">
+     <div class="field"><label for="shop">اسم المحل / المؤسسة *</label><input id="shop" required placeholder="اسم النشاط التجاري"></div>
+     <div class="field"><label for="owner">اسم صاحب المحل *</label><input id="owner" required placeholder="الاسم الكامل"></div>
+     <div class="field"><label for="phone">رقم الهاتف *</label><input id="phone" required inputmode="tel" placeholder="05 / 06 / 07 ..."></div>
+     <div class="field"><label for="mwilaya">الولاية *</label><select id="mwilaya" required><option value="">اختر الولاية</option><option>الجزائر</option><option>البليدة</option><option>وهران</option><option>سطيف</option><option>قسنطينة</option><option>ولاية أخرى</option></select></div>
+     <div class="field"><label for="mtype">أنواع الموازين *</label><select id="mtype" required><option value="">اختر النوع الأساسي</option><option>ميزان إلكتروني</option><option>ميزان تجاري</option><option>ميزان صناعي</option><option>ميزان حساس</option><option>ميزان شاحنات</option><option>أنواع متعددة</option></select></div>
+     <div class="field"><label for="address">عنوان المحل / البلدية</label><input id="address" placeholder="البلدية والحي"></div>
+     <div class="field fullrow"><label for="notes">معلومات إضافية</label><textarea id="notes" rows="3" placeholder="العلامات التجارية، التوصيل، الصيانة..."></textarea></div>
+    </div>
+    <p><button class="btn teal" type="submit">حفظ طلب الانضمام على هذا الجهاز</button></p>
+   </form>
+   <div id="merchantMessage"></div>
+   <p class="muted">ملاحظة: البيانات تُحفظ محليًا في المتصفح على هذا الجهاز فقط. لا تصل تلقائيًا إلى صاحب المشروع ولا تُرسل إلى خادم.</p>
+  </div>
+  <div class="panel">
+   <h3>خطوات الاشتراك المقترحة</h3>
+   <ol><li>إرسال بيانات التاجر والتحقق منها.</li><li>دفع 500 دج شهريًا عبر وسيلة دفع يتم الاتفاق عليها (مثل CCP أو BaridiMob بعد التحقق).</li><li>مراجعة إثبات الدفع يدويًا من الإدارة.</li><li>تفعيل عرض التاجر لمدة شهر ثم تجديد الاشتراك.</li></ol>
+   <div class="notice">لا تضع رقم حساب أو بيانات دفع حقيقية في هذه النسخة التجريبية. آلية الدفع والتحقق لم تُربط بعد.</div>
+  </div>
+ </section>
+
+ <section id="page-admin" class="hidden">
+  <div class="panel">
+   <h2>لوحة الإدارة — تجريبية</h2>
+   <p class="muted">تعرض الطلبات المحفوظة محليًا على هذا المتصفح فقط. ليست لوحة إدارة آمنة ولا تصلح للاستخدام العام.</p>
+   <div class="stats"><div class="stat"><b id="statMerchants">0</b><span>طلبات التجار على هذا الجهاز</span></div><div class="stat"><b>500 دج</b><span>قيمة الاشتراك الشهري</span></div><div class="stat"><b id="statPotential">0 دج</b><span>قيمة افتراضية إذا اشترك الجميع</span></div></div>
+  </div>
+  <div class="panel"><div class="sectionhead"><h3>طلبات الانضمام المسجلة</h3><button id="exportBtn" class="btn light">تصدير CSV</button></div><div id="merchantTable" class="tablewrap"></div><p style="margin-top:14px"><button id="clearBtn" class="btn danger">مسح بيانات التجربة من هذا الجهاز</button></p><div id="adminMessage"></div></div>
+ </section>
+</main>
+<footer><div class="wrap"><b>ميزاني — ميزانك عندنا</b><br>نسخة أولية محلية للتجربة. لا يوجد بعد موقع منشور أو قاعدة بيانات مشتركة أو تسجيل دخول أو تحصيل اشتراكات فعلي.</div></footer>
+<script>
+const sampleProducts=[
+ {id:1,name:"ميزان إلكتروني تجاري",type:"ميزان إلكتروني",wilaya:"الجزائر",icon:"⚖️",description:"نموذج لميزان إلكتروني للمحلات"},
+ {id:2,name:"ميزان صناعي للأوزان الكبيرة",type:"ميزان صناعي",wilaya:"سطيف",icon:"🏭",description:"نموذج لميزان للاستعمال الصناعي"},
+ {id:3,name:"ميزان حساس للمخابر",type:"ميزان حساس",wilaya:"وهران",icon:"🔬",description:"نموذج لميزان دقيق"},
+ {id:4,name:"ميزان تجاري مع شاشة",type:"ميزان تجاري",wilaya:"البليدة",icon:"🛒",description:"نموذج لميزان محل تجاري"},
+ {id:5,name:"ميزان إلكتروني للمحلات",type:"ميزان إلكتروني",wilaya:"الجزائر",icon:"🏪",description:"نموذج لميزان للبيع بالتجزئة"},
+ {id:6,name:"ميزان شاحنات",type:"ميزان شاحنات",wilaya:"قسنطينة",icon:"🚚",description:"نموذج لميزان أوزان كبيرة"}
+];
+const $=id=>document.getElementById(id);
+function renderProducts(){
+ const q=$('q').value.trim().toLowerCase(),type=$('type').value,wilaya=$('wilaya').value;
+ const items=sampleProducts.filter(p=>(!q||(p.name+" "+p.description+" "+p.type).toLowerCase().includes(q))&&(!type||p.type===type)&&(!wilaya||p.wilaya===wilaya));
+ $('productCards').innerHTML=items.map(p=>`<article class="card"><div class="visual">${p.icon}</div><div class="cardbody"><span class="pill">${p.type}</span><h3>${p.name}</h3><div class="price">السعر عند التاجر</div><div class="muted">📍 ${p.wilaya}</div><p class="muted">${p.description}</p><button class="btn primary contactBtn" data-name="${p.name}">طلب معلومات عن المنتج</button></div></article>`).join('');
+ $('resultCount').textContent="العروض الظاهرة: "+items.length;
+ $('noResults').classList.toggle('hidden',items.length>0);
+ document.querySelectorAll('.contactBtn').forEach(b=>b.onclick=()=>alert("هذا عرض تجريبي وليس لدى ميزاني تاجر مسجل بعد. سنضيف بيانات التواصل الحقيقية بعد موافقة التجار."));
+}
+function getMerchants(){try{return JSON.parse(localStorage.getItem('mizani_merchants_v2')||'[]')}catch(e){return []}}
+function setMerchants(v){localStorage.setItem('mizani_merchants_v2',JSON.stringify(v))}
+function renderAdmin(){
+ const rows=getMerchants();$('statMerchants').textContent=rows.length;$('statPotential').textContent=(rows.length*500).toLocaleString('fr-DZ')+" دج";
+ if(!rows.length){$('merchantTable').innerHTML='<div class="empty">لا توجد طلبات محفوظة على هذا الجهاز حتى الآن.</div>';return}
+ $('merchantTable').innerHTML='<table><thead><tr><th>المحل</th><th>صاحب المحل</th><th>الهاتف</th><th>الولاية</th><th>النوع</th><th>التاريخ</th></tr></thead><tbody>'+rows.map(r=>`<tr><td>${esc(r.shop)}</td><td>${esc(r.owner)}</td><td>${esc(r.phone)}</td><td>${esc(r.wilaya)}</td><td>${esc(r.type)}</td><td>${esc(r.date)}</td></tr>`).join('')+'</tbody></table>';
+}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function showPage(page){
+ ['customer','merchant','admin'].forEach(p=>$('page-'+p).classList.toggle('hidden',p!==page));
+ document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+ $('hero').classList.toggle('hidden',page!=='customer');
+ if(page==='admin')renderAdmin();
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.navbtn').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+$('searchBtn').onclick=renderProducts;$('q').addEventListener('keydown',e=>{if(e.key==='Enter')renderProducts()});$('type').onchange=renderProducts;$('wilaya').onchange=renderProducts;
+$('merchantForm').addEventListener('submit',e=>{
+ e.preventDefault();
+ const entry={shop:$('shop').value.trim(),owner:$('owner').value.trim(),phone:$('phone').value.trim(),wilaya:$('mwilaya').value,type:$('mtype').value,address:$('address').value.trim(),notes:$('notes').value.trim(),date:new Date().toLocaleDateString('fr-DZ')};
+ const rows=getMerchants();rows.push(entry);setMerchants(rows);
+ $('merchantMessage').innerHTML='<div class="success">تم حفظ طلبك التجريبي على هذا الجهاز. لم يُرسل إلى أي جهة ولم يُفعّل اشتراكك. في النسخة المنشورة سنربطه بإدارة فعلية.</div>';
+ e.target.reset();
+});
+$('exportBtn').onclick=()=>{
+ const rows=getMerchants();if(!rows.length){$('adminMessage').innerHTML='<div class="notice">لا توجد بيانات للتصدير.</div>';return}
+ const fields=['shop','owner','phone','wilaya','type','address','notes','date'];
+ const csv='\uFEFF'+[fields.join(';'),...rows.map(r=>fields.map(k=>'"'+String(r[k]||'').replace(/"/g,'""')+'"').join(';'))].join('\r\n');
+ const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='mizani-merchant-requests.csv';a.click();URL.revokeObjectURL(url);
+ $('adminMessage').innerHTML='<div class="success">تم تجهيز ملف CSV للتنزيل.</div>';
+};
+$('clearBtn').onclick=()=>{if(confirm('هل تريد حذف جميع طلبات التجربة المحفوظة في هذا المتصفح؟')){localStorage.removeItem('mizani_merchants_v2');renderAdmin();$('adminMessage').innerHTML='<div class="success">تم مسح بيانات التجربة.</div>'}};
+renderProducts();
+</script>
+</body>
+</html>
