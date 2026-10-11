@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
@@ -6,10 +7,10 @@
 <meta name="theme-color" content="#123047">
 <title>ميزاني | ميزانك عندنا</title>
 <style>
-:root{--navy:#123047;--teal:#087e8b;--gold:#f3b544;--paper:#f4f7f9;--ink:#1b2933;--muted:#62727d;--line:#dbe4e8;--white:#fff;--green:#1b7b50;--red:#a63838}
+:root{--navy:#123047;--teal:#087e8b;--gold:#f3b544;--paper:#f4f7f9;--ink:#1b2933;--muted:#62727d;--line:#dbe4e8;--white:#fff;--green:#1b7b50}
 *{box-sizing:border-box}
 body{margin:0;font-family:Tahoma,Arial,sans-serif;background:var(--paper);color:var(--ink);line-height:1.65}
-button,input,select,textarea{font:inherit}
+button,input,select{font:inherit}
 button,a{cursor:pointer}
 a{text-decoration:none}
 .wrap{width:min(1100px,100% - 28px);margin:auto}
@@ -25,13 +26,11 @@ header{background:linear-gradient(125deg,#102b3e,#176071);color:#fff;padding:18p
 .hero h1{font-size:clamp(26px,5vw,42px);line-height:1.25;margin:8px 0}
 .hero p{color:#dceaf0;margin:8px 0 20px}
 .search{background:white;border-radius:16px;padding:12px;display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:8px;box-shadow:0 12px 25px #001c2a25}
-input,select,textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;background:white;color:var(--ink);min-width:0}
-textarea{resize:vertical}
+input,select{width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;background:white;color:var(--ink);min-width:0}
 .btn{border:0;border-radius:10px;padding:11px 15px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:6px}
 .gold{background:var(--gold);color:#26323a}
 .primary{background:var(--navy);color:white}
 .teal{background:var(--teal);color:white}
-.light{background:#e8f3f5;color:var(--navy)}
 .full{width:100%}
 main{padding:22px 0 42px}
 .panel{background:#fff;border:1px solid var(--line);border-radius:15px;padding:17px;margin-bottom:16px}
@@ -52,6 +51,9 @@ main{padding:22px 0 42px}
 .how{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .how div{padding:13px;background:#f6fafb;border-radius:12px}
 .how b{color:var(--teal)}
+.ripbox{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.ripbox input{flex:1;min-width:220px;font-weight:900;letter-spacing:.5px;text-align:center;font-size:17px}
+.success{color:var(--green);font-weight:bold;font-size:13px;min-height:22px}
 footer{background:#0e293a;color:#dce8ed;padding:22px 0;font-size:13px}
 @media(max-width:760px){
 .search{grid-template-columns:1fr 1fr}
@@ -133,28 +135,53 @@ footer{background:#0e293a;color:#dce8ed;padding:22px 0;font-size:13px}
   <div class="panel">
    <h2>فضاء التاجر</h2>
    <p>هل تبيع الموازين في الجزائر؟ انضم إلى دليل ميزاني ليتمكن الزبائن من العثور على نشاطك التجاري والتواصل معك.</p>
+
    <div class="notice">
     <b>الاشتراك: 500 دج شهريًا.</b>
-    لا توجد فترة اشتراك مجانية. إرسال الطلب لا يعني تفعيل الاشتراك أو دفع أي مبلغ تلقائيًا.
+    <br>لا توجد فترة اشتراك مجانية. يتم تفعيل الاشتراك يدويًا بعد التحقق من وصول الدفع.
    </div>
-   <h3 style="margin-top:18px">طلب انضمام تاجر</h3>
-   <p>اضغط على الزر أدناه لملء استمارة الانضمام. ستصل المعلومات إلى صاحب المشروع عبر Google Forms، ويمكن مراجعتها في جدول الردود.</p>
-   <p>
-    <a class="btn teal full" href="https://docs.google.com/forms/d/e/1FAIpQLSf2_y0S3Z6-BTXEED1V1GVrpkM5J2fSp7CDuL0ZL-zjBMrheg/viewform?usp=dialog" target="_blank" rel="noopener">
-     ملء استمارة انضمام التاجر
-    </a>
-   </p>
-   <p class="muted">بعد مراجعة بياناتك، سيتم التواصل معك لتأكيد تفاصيل الاشتراك ووسيلة الدفع. لا ترسل أموالًا قبل الاتفاق والتأكد من الجهة المستقبلة.</p>
-  </div>
-  <div class="panel">
-   <h3>كيف يتم الاشتراك؟</h3>
+
+   <h3 style="margin-top:18px">الدفع عبر بريدي موب فقط</h3>
+   <p>قيمة الاشتراك الشهري هي <b>500 دج</b>. استعمل رقم RIP التالي في تطبيق بريدي موب، وتحقق من بيانات المستفيد قبل تأكيد أي تحويل.</p>
+
+   <label for="ripNumber"><b>رقم RIP لاستقبال الاشتراكات</b></label>
+   <div class="ripbox">
+    <input id="ripNumber" value="00799999001220391835" readonly dir="ltr" aria-label="رقم RIP">
+    <button class="btn primary" type="button" id="copyRipBtn">نسخ رقم RIP</button>
+   </div>
+   <div id="copyStatus" class="success" aria-live="polite"></div>
+
+   <div class="notice">
+    إذا لم يقبل تطبيق بريدي موب الرقم أو ظهرت بيانات مستفيد غير مطابقة، لا تُكمل التحويل قبل التأكد من صحة بيانات الحساب.
+   </div>
+
+   <h3 style="margin-top:18px">الخطوة الأولى: طلب الانضمام</h3>
+   <p>املأ استمارة الانضمام ببيانات محلك ورقم هاتفك قبل الدفع.</p>
+   <a class="btn teal full" href="https://docs.google.com/forms/d/e/1FAIpQLSf2_y0S3Z6-BTXEED1V1GVrpkM5J2fSp7CDuL0ZL-zjBMrheg/viewform?usp=dialog" target="_blank" rel="noopener">
+    ملء استمارة انضمام التاجر
+   </a>
+
+   <h3 style="margin-top:20px">الخطوة الثانية: إثبات الدفع</h3>
    <ol>
-    <li>املأ استمارة الانضمام ببيانات صحيحة.</li>
-    <li>نراجع بيانات المحل ووسائل التواصل.</li>
-    <li>يتم التواصل معك بشأن الاشتراك الشهري البالغ 500 دج وطريقة الدفع.</li>
-    <li>يُفعّل عرضك بعد الاتفاق والتحقق يدويًا.</li>
+    <li>حوّل مبلغ 500 دج عبر بريدي موب بعد التحقق من بيانات المستفيد.</li>
+    <li>احتفظ بإيصال التحويل.</li>
+    <li>جهّز إثبات الدفع مع اسم المحل ورقم الهاتف.</li>
+    <li>يُفعّل الاشتراك لمدة شهر بعد التحقق اليدوي من وصول المبلغ.</li>
    </ol>
-   <div class="notice">الموقع في مرحلة أولية؛ عروض الموازين المعروضة حاليًا أمثلة توضيحية وليست إعلانات حقيقية.</div>
+   <div class="notice">
+    <b>تنبيه:</b> لم تتم إضافة وسيلة تواصل لإرسال إثبات الدفع بعد. يجب تحديد رقم واتساب أو بريد إلكتروني خاص بالمشروع وإضافته هنا قبل استقبال اشتراكات التجار.
+   </div>
+  </div>
+
+  <div class="panel">
+   <h3>شروط الاشتراك</h3>
+   <ul>
+    <li>الاشتراك مدفوع: 500 دج شهريًا.</li>
+    <li>لا توجد فترة تجريبية مجانية.</li>
+    <li>إرسال الاستمارة لا يعني أن الاشتراك قد تم تفعيله.</li>
+    <li>تأكيد الدفع وتفعيل الاشتراك يتمان يدويًا.</li>
+    <li>العروض المعروضة حاليًا أمثلة توضيحية وليست إعلانات حقيقية.</li>
+   </ul>
   </div>
  </section>
 
@@ -162,13 +189,19 @@ footer{background:#0e293a;color:#dce8ed;padding:22px 0;font-size:13px}
   <div class="panel">
    <h2>متابعة طلبات التجار</h2>
    <p>طلبات الانضمام تُجمع عبر استمارة Google Forms، وليست مخزنة داخل الموقع نفسه.</p>
-   <p>
-    <a class="btn primary full" href="https://docs.google.com/forms/d/e/1FAIpQLSf2_y0S3Z6-BTXEED1V1GVrpkM5J2fSp7CDuL0ZL-zjBMrheg/viewform?usp=dialog" target="_blank" rel="noopener">
-     فتح استمارة التاجر
-    </a>
-   </p>
-   <p class="muted">لمراجعة الردود، افتح جدول بيانات Google Sheets المرتبط بالاستمارة من حساب Google الذي أنشأها. هذه الصفحة ليست لوحة إدارة آمنة ولا تعرض بيانات التجار مباشرة.</p>
-   <div class="notice">تذكير: قيمة الاشتراك 500 دج شهريًا، دون فترة مجانية. لا يوجد تحصيل إلكتروني آلي مربوط بالموقع حاليًا.</div>
+   <a class="btn primary full" href="https://docs.google.com/forms/d/e/1FAIpQLSf2_y0S3Z6-BTXEED1V1GVrpkM5J2fSp7CDuL0ZL-zjBMrheg/viewform?usp=dialog" target="_blank" rel="noopener">
+    فتح استمارة التاجر
+   </a>
+   <p class="muted">لمراجعة الردود، افتح جدول Google Sheets المرتبط بالاستمارة من حساب Google الذي أنشأها.</p>
+
+   <h3 style="margin-top:18px">طريقة إدارة الاشتراكات</h3>
+   <ol>
+    <li>راجع طلب التاجر في جدول الردود.</li>
+    <li>تحقق من وصول 500 دج إلى حسابك.</li>
+    <li>سجّل تاريخ الدفع وبداية الاشتراك ونهايته في جدول خاص.</li>
+    <li>جدّد الاشتراك بعد التحقق من دفع الشهر التالي.</li>
+   </ol>
+   <div class="notice">هذه الصفحة ليست لوحة إدارة آمنة. لا تعرض بيانات الدفع أو حالة الاشتراك تلقائيًا، ولا يفعّل الموقع التجار آليًا.</div>
   </div>
  </section>
 </main>
@@ -176,12 +209,14 @@ footer{background:#0e293a;color:#dce8ed;padding:22px 0;font-size:13px}
 <footer>
  <div class="wrap">
   <b>ميزاني — ميزانك عندنا</b><br>
-  دليل أولي للموازين في الجزائر. عروض المنتجات المعروضة أمثلة توضيحية. طلبات التجار تُجمع عبر استمارة Google Forms، والاشتراك الشهري 500 دج ويتم تأكيده يدويًا بعد مراجعة الطلب.
+  دليل أولي للموازين في الجزائر. عروض المنتجات المعروضة أمثلة توضيحية. الاشتراك 500 دج شهريًا عبر بريدي موب باستخدام رقم RIP المعروض في فضاء التاجر، ويُفعّل يدويًا بعد التحقق من الدفع.
  </div>
 </footer>
 
 <script>
-const sampleProducts=[
+const RIP_NUMBER = "00799999001220391835";
+
+const sampleProducts = [
  {id:1,name:"ميزان إلكتروني تجاري",type:"ميزان إلكتروني",wilaya:"الجزائر",icon:"⚖️",description:"نموذج لميزان إلكتروني للمحلات"},
  {id:2,name:"ميزان صناعي للأوزان الكبيرة",type:"ميزان صناعي",wilaya:"سطيف",icon:"🏭",description:"نموذج لميزان للاستعمال الصناعي"},
  {id:3,name:"ميزان حساس للمخابر",type:"ميزان حساس",wilaya:"وهران",icon:"🔬",description:"نموذج لميزان دقيق"},
@@ -190,20 +225,20 @@ const sampleProducts=[
  {id:6,name:"ميزان شاحنات",type:"ميزان شاحنات",wilaya:"قسنطينة",icon:"🚚",description:"نموذج لميزان أوزان كبيرة"}
 ];
 
-const $=id=>document.getElementById(id);
+const $ = id => document.getElementById(id);
 
 function renderProducts(){
- const q=$('q').value.trim().toLowerCase();
- const type=$('type').value;
- const wilaya=$('wilaya').value;
+ const q = $("q").value.trim().toLowerCase();
+ const type = $("type").value;
+ const wilaya = $("wilaya").value;
 
- const items=sampleProducts.filter(p=>
-  (!q||(p.name+" "+p.description+" "+p.type).toLowerCase().includes(q)) &&
-  (!type||p.type===type) &&
-  (!wilaya||p.wilaya===wilaya)
+ const items = sampleProducts.filter(p =>
+  (!q || (p.name+" "+p.description+" "+p.type).toLowerCase().includes(q)) &&
+  (!type || p.type === type) &&
+  (!wilaya || p.wilaya === wilaya)
  );
 
- $('productCards').innerHTML=items.map(p=>`
+ $("productCards").innerHTML = items.map(p => `
   <article class="card">
    <div class="visual">${p.icon}</div>
    <div class="cardbody">
@@ -215,37 +250,62 @@ function renderProducts(){
     <button class="btn primary contactBtn">طلب معلومات عن المنتج</button>
    </div>
   </article>
- `).join('');
+ `).join("");
 
- $('resultCount').textContent="العروض الظاهرة: "+items.length;
- $('noResults').classList.toggle('hidden',items.length>0);
+ $("resultCount").textContent = "العروض الظاهرة: " + items.length;
+ $("noResults").classList.toggle("hidden", items.length > 0);
 
- document.querySelectorAll('.contactBtn').forEach(b=>{
-  b.onclick=()=>alert("هذا عرض تجريبي وليس لدى ميزاني تاجر مسجل بعد. سنضيف بيانات التواصل الحقيقية بعد موافقة التجار.");
+ document.querySelectorAll(".contactBtn").forEach(b => {
+  b.onclick = () => alert("هذا عرض تجريبي وليس لدى ميزاني تاجر مسجل بعد. سنضيف بيانات التواصل الحقيقية بعد موافقة التجار.");
  });
 }
 
 function showPage(page){
- ['customer','merchant','admin'].forEach(p=>{
-  $('page-'+p).classList.toggle('hidden',p!==page);
+ ["customer","merchant","admin"].forEach(p => {
+  $("page-"+p).classList.toggle("hidden", p !== page);
  });
- document.querySelectorAll('.navbtn').forEach(b=>{
-  b.classList.toggle('active',b.dataset.page===page);
+ document.querySelectorAll(".navbtn").forEach(b => {
+  b.classList.toggle("active", b.dataset.page === page);
  });
- $('hero').classList.toggle('hidden',page!=='customer');
- window.scrollTo({top:0,behavior:'smooth'});
+ $("hero").classList.toggle("hidden", page !== "customer");
+ window.scrollTo({top:0,behavior:"smooth"});
 }
 
-document.querySelectorAll('.navbtn').forEach(b=>{
- b.addEventListener('click',()=>showPage(b.dataset.page));
+document.querySelectorAll(".navbtn").forEach(b => {
+ b.addEventListener("click", () => showPage(b.dataset.page));
 });
 
-$('searchBtn').onclick=renderProducts;
-$('q').addEventListener('keydown',e=>{
- if(e.key==='Enter')renderProducts();
+$("searchBtn").onclick = renderProducts;
+$("q").addEventListener("keydown", e => {
+ if(e.key === "Enter") renderProducts();
 });
-$('type').onchange=renderProducts;
-$('wilaya').onchange=renderProducts;
+$("type").onchange = renderProducts;
+$("wilaya").onchange = renderProducts;
+
+$("copyRipBtn").addEventListener("click", async () => {
+ const status = $("copyStatus");
+ const field = $("ripNumber");
+
+ try {
+  if (navigator.clipboard && window.isSecureContext) {
+   await navigator.clipboard.writeText(RIP_NUMBER);
+   status.textContent = "تم نسخ رقم RIP. يمكنك لصقه في بريدي موب.";
+  } else {
+   field.focus();
+   field.select();
+   field.setSelectionRange(0, field.value.length);
+   const copied = document.execCommand("copy");
+   status.textContent = copied
+    ? "تم نسخ رقم RIP."
+    : "تم تحديد الرقم؛ اضغط نسخ من هاتفك.";
+  }
+ } catch (error) {
+  field.focus();
+  field.select();
+  field.setSelectionRange(0, field.value.length);
+  status.textContent = "تم تحديد الرقم؛ انسخه ثم الصقه في بريدي موب.";
+ }
+});
 
 renderProducts();
 </script>
