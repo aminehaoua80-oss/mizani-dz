@@ -5,30 +5,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>فضاء التاجر | ميزاني</title>
-
 <style>
 * { box-sizing: border-box; }
-
 body {
   font-family: Arial, sans-serif;
   background: #f1f5f7;
   color: #17384a;
   margin: 0;
+  line-height: 1.7;
 }
-
 header {
   background: #123c55;
   color: white;
   text-align: center;
   padding: 22px;
 }
-
-main {
-  max-width: 600px;
-  margin: auto;
-  padding: 15px;
-}
-
+main { max-width: 600px; margin: auto; padding: 15px; }
 .card {
   background: white;
   border-radius: 12px;
@@ -36,7 +28,6 @@ main {
   margin: 14px 0;
   box-shadow: 0 2px 8px #0000000d;
 }
-
 input, button {
   display: block;
   width: 100%;
@@ -45,9 +36,8 @@ input, button {
   border-radius: 8px;
   font-size: 16px;
 }
-
 input { border: 1px solid #ccd6dd; }
-
+label { display: block; margin-top: 12px; font-weight: bold; }
 button {
   border: 0;
   background: #176b54;
@@ -55,25 +45,19 @@ button {
   font-weight: bold;
   cursor: pointer;
 }
-
 .secondary { background: #31566b; }
-
 .note {
   background: #edf5f2;
   padding: 12px;
   border-radius: 8px;
   overflow-wrap: anywhere;
 }
-
 .hidden { display: none; }
-
-#authMessage, #spaceMessage {
+#authMessage, #spaceMessage, #profileMessage {
   overflow-wrap: anywhere;
-  line-height: 1.7;
 }
 </style>
 </head>
-
 <body>
 
 <header>
@@ -82,45 +66,57 @@ button {
 </header>
 
 <main>
-
 <section class="card" id="authBox">
   <h2>الدخول إلى فضاء التاجر</h2>
-
   <p>إذا كنت تاجرًا جديدًا، أدخل اسمك وبريدك الإلكتروني لإنشاء حساب.</p>
 
-  <input
-    id="merchantName"
-    type="text"
-    placeholder="اسم التاجر أو المحل"
-    autocomplete="organization">
+  <label for="merchantName">اسم التاجر أو المحل</label>
+  <input id="merchantName" type="text" placeholder="اسم التاجر أو المحل" autocomplete="organization">
 
-  <input
-    id="email"
-    type="email"
-    placeholder="البريد الإلكتروني"
-    autocomplete="username">
+  <label for="email">البريد الإلكتروني</label>
+  <input id="email" type="email" placeholder="البريد الإلكتروني" autocomplete="username">
 
-  <input
-    id="password"
-    type="password"
-    placeholder="كلمة المرور"
-    autocomplete="current-password">
+  <label for="password">كلمة المرور</label>
+  <input id="password" type="password" placeholder="كلمة المرور" autocomplete="current-password">
 
   <button onclick="login()">تسجيل الدخول</button>
-
-  <button class="secondary" onclick="register()">
-    إنشاء حساب تاجر جديد
-  </button>
-
+  <button class="secondary" onclick="register()">إنشاء حساب تاجر جديد</button>
   <p id="authMessage" role="status"></p>
 </section>
 
 <section class="card hidden" id="space">
-
   <h2>مرحبًا بك في فضاء التاجر</h2>
-
   <p>اسم التاجر: <strong id="displayName"></strong></p>
   <p>البريد الإلكتروني: <span id="merchantEmail"></span></p>
+
+  <hr>
+
+  <h3>بيانات النشاط التجاري</h3>
+  <p>أكمل المعلومات التالية ليتمكن الزبائن من العثور على نشاطك. البيانات لا تُنشر قبل مراجعة الإدارة.</p>
+
+  <label for="shopName">اسم المحل أو المؤسسة *</label>
+  <input id="shopName" type="text" placeholder="اسم المحل أو المؤسسة">
+
+  <label for="phone">رقم الهاتف *</label>
+  <input id="phone" type="tel" placeholder="رقم الهاتف">
+
+  <label for="wilaya">الولاية *</label>
+  <input id="wilaya" type="text" placeholder="مثال: الجزائر">
+
+  <label for="commune">البلدية *</label>
+  <input id="commune" type="text" placeholder="اسم البلدية">
+
+  <label for="address">العنوان أو المنطقة *</label>
+  <input id="address" type="text" placeholder="الحي أو العنوان">
+
+  <label for="scaleTypes">أنواع الموازين التي توفرها *</label>
+  <input id="scaleTypes" type="text" placeholder="مثال: موازين إلكترونية وتجارية">
+
+  <label for="extraInfo">معلومات إضافية (اختياري)</label>
+  <input id="extraInfo" type="text" placeholder="معلومات تساعد الزبائن">
+
+  <button onclick="saveBusinessProfile()">حفظ بيانات النشاط</button>
+  <p id="profileMessage" role="status"></p>
 
   <hr>
 
@@ -129,36 +125,20 @@ button {
 
   <div class="note">
     <h3>الدفع عبر RIP</h3>
-
     <p>رقم الحساب البريدي:</p>
-
     <p><strong id="rip">00799999001220391835</strong></p>
-
-    <button class="secondary" onclick="copyRIP()">
-      نسخ رقم RIP
-    </button>
-
-    <p>
-      بعد تحويل مبلغ الاشتراك، تواصل مع إدارة ميزاني عبر واتساب
-      لتأكيد التحويل والتحقق من وصول المبلغ.
-    </p>
+    <button class="secondary" onclick="copyRIP()">نسخ رقم RIP</button>
+    <p>بعد تحويل مبلغ الاشتراك، تواصل مع الإدارة عبر واتساب لتأكيد التحويل والتحقق من وصول المبلغ.</p>
   </div>
 
   <h3>حالة الاشتراك</h3>
   <p id="status">جارٍ تحميل الحالة...</p>
 
-  <button onclick="confirmPayment()">
-    تأكيد التحويل عبر واتساب
-  </button>
-
+  <button onclick="confirmPayment()">تأكيد التحويل عبر واتساب</button>
   <p id="spaceMessage" role="status"></p>
 
-  <button class="secondary" onclick="logout()">
-    تسجيل الخروج
-  </button>
-
+  <button class="secondary" onclick="logout()">تسجيل الخروج</button>
 </section>
-
 </main>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -181,12 +161,9 @@ firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 const db = firebase.database();
-
 const ADMIN_EMAIL = "aminehaoua80@gmail.com";
 const RIP = "00799999001220391835";
 const WHATSAPP = "213557619186";
-
-let currentMerchant = null;
 
 function say(id, text) {
   document.getElementById(id).textContent = text;
@@ -218,13 +195,8 @@ async function register() {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
 
-  if (!name) {
-    showMessage("أدخل اسم التاجر أو المحل أولًا.");
-    return;
-  }
-
-  if (!email || !password) {
-    showMessage("أدخل البريد الإلكتروني وكلمة المرور.");
+  if (!name || !email || !password) {
+    showMessage("أدخل اسم التاجر والبريد الإلكتروني وكلمة المرور.");
     return;
   }
 
@@ -239,10 +211,7 @@ async function register() {
   }
 
   try {
-    const result = await auth.createUserWithEmailAndPassword(
-      email,
-      password
-    );
+    const result = await auth.createUserWithEmailAndPassword(email, password);
 
     await db.ref("traders/" + result.user.uid).set({
       name: name,
@@ -251,49 +220,40 @@ async function register() {
       createdAt: new Date().toISOString()
     });
 
-    showMessage("تم إنشاء الحساب. اشتراكك ينتظر مراجعة الإدارة.");
+    showMessage("تم إنشاء الحساب. أكمل بيانات نشاطك التجاري.");
+    await loadTraderProfile(result.user);
   } catch (error) {
-    showMessage(
-      "تعذر إكمال التسجيل. تحقق من إعدادات Firebase أو من وجود الحساب مسبقًا. إذا كان الحساب قد أُنشئ بالفعل، فلا تكرر التسجيل قبل مراجعة الإدارة."
-    );
+    showMessage("تعذر إكمال التسجيل. قد تكون هناك مشكلة في قواعد Firebase أو أن الحساب موجود مسبقًا.");
   }
 }
 
-auth.onAuthStateChanged(async user => {
-  const isTrader = user &&
-    user.email &&
-    user.email.toLowerCase() !== ADMIN_EMAIL.toLowerCase();
-
-  document.getElementById("authBox").classList.toggle(
-    "hidden", !!isTrader
-  );
-
-  document.getElementById("space").classList.toggle(
-    "hidden", !isTrader
-  );
-
-  if (!isTrader) {
-    currentMerchant = null;
-    return;
-  }
-
-  currentMerchant = user;
-
-  say("merchantEmail", user.email);
-  say("displayName", "جارٍ تحميل الاسم...");
-  say("status", "جارٍ تحميل الحالة...");
-
+async function loadTraderProfile(user) {
   try {
     const snapshot = await db.ref("traders/" + user.uid).once("value");
     const profile = snapshot.val();
 
     if (!profile) {
       say("displayName", "غير مسجل");
-      say("status", "لم يُعثر على ملف التاجر. تواصل مع الإدارة.");
+      say("status", "لم يُعثر على ملف التاجر. تحقق من قواعد Firebase.");
       return;
     }
 
+    say("merchantEmail", user.email || "");
     say("displayName", profile.name || "لم يُسجّل الاسم");
+
+    document.getElementById("shopName").value = profile.shopName || profile.name || "";
+    document.getElementById("phone").value = profile.phone || "";
+    document.getElementById("wilaya").value = profile.wilaya || "";
+    document.getElementById("commune").value = profile.commune || "";
+    document.getElementById("address").value = profile.address || "";
+    document.getElementById("scaleTypes").value = profile.scaleTypes || "";
+    document.getElementById("extraInfo").value = profile.extraInfo || "";
+
+    if (profile.profileStatus === "submitted") {
+      say("profileMessage", "بيانات النشاط محفوظة وبانتظار مراجعة الإدارة.");
+    } else {
+      say("profileMessage", "");
+    }
 
     const labels = {
       pending: "الحساب قيد المراجعة",
@@ -302,22 +262,71 @@ auth.onAuthStateChanged(async user => {
       expired: "الاشتراك منتهٍ"
     };
 
-    say(
-      "status",
-      labels[profile.subscriptionStatus] ||
-      "حالة الاشتراك: " + (profile.subscriptionStatus || "غير محددة")
-    );
+    say("status", labels[profile.subscriptionStatus] ||
+      "حالة الاشتراك: " + (profile.subscriptionStatus || "غير محددة"));
   } catch (error) {
-    say("status", "تعذر تحميل الحالة. تحقق من إعدادات Firebase.");
+    say("status", "تعذر تحميل البيانات. تحقق من قواعد Firebase.");
   }
+}
+
+auth.onAuthStateChanged(async user => {
+  const isTrader = !!(user && user.email &&
+    user.email.toLowerCase() !== ADMIN_EMAIL.toLowerCase());
+
+  document.getElementById("authBox").classList.toggle("hidden", isTrader);
+  document.getElementById("space").classList.toggle("hidden", !isTrader);
+
+  if (!isTrader) return;
+
+  say("merchantEmail", user.email);
+  say("displayName", "جارٍ تحميل الاسم...");
+  say("status", "جارٍ تحميل الحالة...");
+  await loadTraderProfile(user);
 });
+
+async function saveBusinessProfile() {
+  const user = auth.currentUser;
+
+  if (!user) {
+    say("profileMessage", "سجّل الدخول أولًا.");
+    return;
+  }
+
+  const business = {
+    shopName: document.getElementById("shopName").value.trim(),
+    phone: document.getElementById("phone").value.trim(),
+    wilaya: document.getElementById("wilaya").value.trim(),
+    commune: document.getElementById("commune").value.trim(),
+    address: document.getElementById("address").value.trim(),
+    scaleTypes: document.getElementById("scaleTypes").value.trim(),
+    extraInfo: document.getElementById("extraInfo").value.trim()
+  };
+
+  if (!business.shopName || !business.phone || !business.wilaya ||
+      !business.commune || !business.address || !business.scaleTypes) {
+    say("profileMessage", "يرجى ملء جميع الحقول الإلزامية التي تحمل علامة *.");
+    return;
+  }
+
+  try {
+    await db.ref("traders/" + user.uid).update({
+      ...business,
+      profileStatus: "submitted",
+      profileUpdatedAt: new Date().toISOString()
+    });
+
+    say("profileMessage", "تم حفظ بيانات النشاط وإرسالها للمراجعة. لن تظهر للزبائن حتى توافق الإدارة على نشرها.");
+  } catch (error) {
+    say("profileMessage", "تعذر حفظ البيانات. قد تحتاج قواعد Firebase إلى تصحيح.");
+  }
+}
 
 async function copyRIP() {
   try {
     await navigator.clipboard.writeText(RIP);
     say("spaceMessage", "تم نسخ رقم RIP.");
   } catch (error) {
-    say("spaceMessage", "يمكنك نسخ رقم RIP يدويًا: " + RIP);
+    say("spaceMessage", "انسخ رقم RIP يدويًا: " + RIP);
   }
 }
 
@@ -338,18 +347,16 @@ async function confirmPayment() {
       return;
     }
 
-    const name = profile.name || "غير مسجل";
+    const name = profile.shopName || profile.name || "غير مسجل";
     const email = user.email || "";
 
-    const request = {
+    await db.ref("paymentRequests/" + user.uid).push({
       name: name,
       email: email,
       amountDZD: 500,
       status: "pending_verification",
       createdAt: new Date().toISOString()
-    };
-
-    await db.ref("paymentRequests/" + user.uid).push(request);
+    });
 
     const message =
       "السلام عليكم، إدارة ميزاني.\n\n" +
@@ -359,22 +366,11 @@ async function confirmPayment() {
       "أطلب التحقق من تحويل الاشتراك وتفعيل الحساب بعد التأكد من وصول المبلغ.\n\n" +
       "شكرًا لكم.";
 
-    const url =
-      "https://wa.me/" + WHATSAPP +
+    say("spaceMessage", "تم تسجيل طلب التحقق. افتح واتساب وأرسل الرسالة للإدارة.");
+    window.location.href = "https://wa.me/" + WHATSAPP +
       "?text=" + encodeURIComponent(message);
-
-    say(
-      "spaceMessage",
-      "تم تسجيل طلب التحقق. افتح واتساب وأرسل الرسالة إلى الإدارة بعد التحويل الفعلي."
-    );
-
-    window.location.href = url;
-
   } catch (error) {
-    say(
-      "spaceMessage",
-      "تعذر تسجيل طلب التحقق في قاعدة البيانات. يمكنك التواصل مع الإدارة عبر واتساب، لكن لم يتم تأكيد تسجيل الطلب."
-    );
+    say("spaceMessage", "تعذر تسجيل طلب التحقق. لم يتم تأكيد تسجيل الطلب؛ تواصل مع الإدارة عبر واتساب.");
   }
 }
 
@@ -382,6 +378,5 @@ async function logout() {
   await auth.signOut();
 }
 </script>
-
 </body>
 </html>
