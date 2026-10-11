@@ -1,67 +1,180 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>لوحة إدارة ميزاني</title>
-<style>
-body{font-family:Arial,sans-serif;background:#f2f6f3;margin:0;padding:18px;color:#183b2b}
-main{max-width:900px;margin:auto}
-section{background:white;padding:20px;margin:14px 0;border-radius:14px;box-shadow:0 2px 8px #0001}
-h1,h2{color:#176b45}
-input,button{box-sizing:border-box;width:100%;padding:12px;margin:7px 0;border-radius:8px;font-size:16px}
-input{border:1px solid #ccd8cf}
-button{background:#176b45;color:white;border:0;font-weight:bold}
-.secondary{background:#e5f1e9;color:#176b45}
-.hidden{display:none}
-pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f7f5;padding:12px;border-radius:8px;direction:ltr;text-align:left}
-.status{padding:10px;background:#edf5ef;border-radius:8px;overflow-wrap:anywhere}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>إدارة ميزاني</title>
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f2f5f8;
+      color: #183047;
+    }
+    header {
+      background: #123c55;
+      color: white;
+      padding: 22px 16px;
+      text-align: center;
+    }
+    header h1 { margin: 0 0 8px; }
+    main { max-width: 950px; margin: auto; padding: 16px; }
+    .card {
+      background: white;
+      padding: 16px;
+      margin: 14px 0;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #0000000d;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      padding: 12px;
+      margin: 6px 0;
+      border: 1px solid #ccd6dd;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      background: #176b54;
+      color: white;
+      border: 0;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button.secondary { background: #31566b; }
+    button.danger { background: #a83232; }
+    button:disabled { opacity: .5; }
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .tabs button { margin: 0; }
+    .item {
+      border: 1px solid #dbe3e8;
+      border-radius: 10px;
+      padding: 12px;
+      margin: 12px 0;
+      overflow-wrap: anywhere;
+    }
+    pre {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      background: #f5f7f9;
+      padding: 10px;
+      border-radius: 8px;
+      direction: ltr;
+      text-align: left;
+    }
+    .hidden { display: none; }
+    .muted { color: #657784; font-size: 14px; }
+    #message { font-weight: bold; }
+  </style>
 </head>
+
 <body>
+<header>
+  <h1>ميزاني</h1>
+  <div>لوحة الإدارة — ميزانك عندنا</div>
+</header>
+
 <main>
-<section>
-<h1>ميزاني — لوحة الإدارة</h1>
-<p>إدارة التجار والاشتراكات ومراجعة البيانات.</p>
-</section>
+  <section class="card" id="loginBox">
+    <h2>دخول الإدارة</h2>
+    <p class="muted">الدخول مخصص لحساب الإدارة المعتمد.</p>
+    <input id="email" type="email"
+      placeholder="البريد الإلكتروني"
+      autocomplete="username">
+    <input id="password" type="password"
+      placeholder="كلمة المرور"
+      autocomplete="current-password">
+    <button id="loginBtn" onclick="login()">تسجيل الدخول</button>
+  </section>
 
-<section id="loginPanel">
-<h2>دخول الإدارة</h2>
-<form id="loginForm">
-<label for="email">البريد الإلكتروني</label>
-<input id="email" type="email" value="aminehaoua80@gmail.com" required>
-<label for="password">كلمة المرور</label>
-<input id="password" type="password" autocomplete="current-password" required>
-<button type="submit">تسجيل الدخول</button>
-</form>
-<p id="loginStatus" class="status">أدخل كلمة مرور حساب الإدارة في Firebase.</p>
-</section>
+  <section id="dashboard" class="hidden">
+    <div class="card">
+      <div id="welcome"></div>
+      <button class="secondary" onclick="loadAll()">تحديث البيانات</button>
+      <button class="danger" onclick="logout()">تسجيل الخروج</button>
+      <p id="message" role="status"></p>
+    </div>
 
-<div id="dashboard" class="hidden">
-<section>
-<h2>مرحبًا بك في لوحة الإدارة</h2>
-<p id="account"></p>
-<button id="refresh" class="secondary" type="button">تحديث البيانات</button>
-<button id="logout" type="button">تسجيل الخروج</button>
-<p id="status" class="status">جاهز.</p>
-</section>
+    <div class="card">
+      <h3>أقسام الإدارة</h3>
+      <div class="tabs">
+        <button onclick="showSection('requests')">طلبات التجار</button>
+        <button onclick="showSection('public')">التجار المنشورون</button>
+        <button onclick="showSection('private')">البيانات الخاصة</button>
+        <button onclick="showSection('payments')">الاشتراكات والدفع</button>
+      </div>
+    </div>
 
-<section>
-<h2>التجار المنشورون للزبائن</h2>
-<pre id="publicData">لم يتم التحميل.</pre>
-</section>
+    <section class="card" id="requests">
+      <h3>طلبات التجار</h3>
+      <p class="muted">
+        الطلبات التي تصل إلى مسار privateMerchants تظهر هنا.
+        الاستمارة الحالية ليست مربوطة تلقائيًا بهذا المسار.
+      </p>
+      <div id="privateList"></div>
+    </section>
 
-<section>
-<h2>البيانات الخاصة بالتجار</h2>
-<pre id="privateData">لم يتم التحميل.</pre>
-</section>
+    <section class="card hidden" id="public">
+      <h3>التجار المنشورون</h3>
+      <div id="publicList"></div>
+    </section>
 
-<section>
-<h2>الاشتراكات والمدفوعات</h2>
-<pre id="paymentData">لم يتم التحميل.</pre>
-</section>
-</div>
+    <section class="card hidden" id="private">
+      <h3>البيانات الخاصة</h3>
+      <div id="privateAllList"></div>
+    </section>
+
+    <section class="card hidden" id="payments">
+      <h3>تسجيل دفعة اشتراك</h3>
+      <p>قيمة الاشتراك الشهري: <strong>500 دج</strong></p>
+      <form onsubmit="addPayment(event)">
+        <input id="payMerchant" required
+          placeholder="اسم التاجر">
+        <input id="payAmount" type="number" min="0"
+          value="500" required placeholder="المبلغ بالدينار">
+        <input id="payDate" type="date" required>
+        <select id="payStatus">
+          <option value="مدفوع">مدفوع</option>
+          <option value="قيد التحقق">قيد التحقق</option>
+          <option value="غير مدفوع">غير مدفوع</option>
+        </select>
+        <textarea id="payNote"
+          placeholder="ملاحظات داخلية (اختياري)"></textarea>
+        <button type="submit">حفظ سجل الدفع</button>
+      </form>
+      <hr>
+      <h3>سجلات الدفع</h3>
+      <div id="paymentsList"></div>
+    </section>
+
+    <section class="card">
+      <h3>إضافة تاجر مباشرة</h3>
+      <p class="muted">
+        لا تنشر بيانات أي تاجر قبل الحصول على موافقته.
+      </p>
+      <form onsubmit="addMerchant(event)">
+        <input id="merchantName" required placeholder="اسم المتجر أو التاجر">
+        <input id="merchantWilaya" required placeholder="الولاية">
+        <input id="merchantType" required placeholder="نوع الموازين">
+        <input id="merchantPhone" required placeholder="هاتف التواصل">
+        <input id="merchantAddress" placeholder="العنوان">
+        <textarea id="merchantDescription"
+          placeholder="وصف مختصر"></textarea>
+        <label>
+          <input id="merchantConsent" type="checkbox"
+            required style="width:auto">
+          أؤكد الحصول على موافقة التاجر على نشر بياناته.
+        </label>
+        <button type="submit">نشر التاجر</button>
+      </form>
+    </section>
+  </section>
 </main>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -83,89 +196,281 @@ const firebaseConfig = {
 const ADMIN_EMAIL = "aminehaoua80@gmail.com";
 
 firebase.initializeApp(firebaseConfig);
-
 const auth = firebase.auth();
 const db = firebase.database();
 
-const el = id => document.getElementById(id);
+let currentUser = null;
+let publicData = {};
+let privateData = {};
+let paymentData = {};
 
-function message(id, text) {
-  el(id).textContent = text;
+function message(text) {
+  const el = document.getElementById("message");
+  if (el) el.textContent = text;
 }
 
-async function readData(path, target) {
-  try {
-    const snapshot = await db.ref(path).get();
-    el(target).textContent = snapshot.exists()
-      ? JSON.stringify(snapshot.val(), null, 2)
-      : "لا توجد بيانات حاليًا.";
-    return true;
-  } catch (error) {
-    el(target).textContent =
-      "تعذر تحميل البيانات: " + error.message;
-    return false;
-  }
+function showSection(id) {
+  ["requests", "public", "private", "payments"].forEach(name => {
+    document.getElementById(name).classList.toggle("hidden", name !== id);
+  });
 }
 
-async function loadData() {
-  message("status", "جارٍ تحميل البيانات...");
-  const results = await Promise.all([
-    readData("publicMerchants", "publicData"),
-    readData("privateMerchants", "privateData"),
-    readData("payments", "paymentData")
-  ]);
-
-  message(
-    "status",
-    results.every(Boolean)
-      ? "انتهى تحديث البيانات."
-      : "تعذر تحميل بعض البيانات. راجع رسائل الخطأ."
-  );
+function safeText(value) {
+  return String(value == null ? "" : value);
 }
 
-auth.onAuthStateChanged(user => {
-  const allowed =
-    user && user.email &&
-    user.email.toLowerCase() === ADMIN_EMAIL;
+function makeItem(title, data, buttons) {
+  const div = document.createElement("div");
+  div.className = "item";
 
-  el("loginPanel").classList.toggle("hidden", !!allowed);
-  el("dashboard").classList.toggle("hidden", !allowed);
+  const heading = document.createElement("strong");
+  heading.textContent = title;
+  div.appendChild(heading);
 
-  if (user && !allowed) {
-    auth.signOut();
-    message("loginStatus", "هذا الحساب غير مصرح له بالدخول.");
+  const pre = document.createElement("pre");
+  pre.textContent = JSON.stringify(data, null, 2);
+  div.appendChild(pre);
+
+  (buttons || []).forEach(info => {
+    const button = document.createElement("button");
+    button.textContent = info.label;
+    button.className = info.className || "secondary";
+    button.onclick = info.action;
+    div.appendChild(button);
+  });
+
+  return div;
+}
+
+function renderList(containerId, data, actionFactory) {
+  const container = document.getElementById(containerId);
+  container.replaceChildren();
+
+  const entries = Object.entries(data || {});
+  if (!entries.length) {
+    container.textContent = "لا توجد بيانات حاليًا.";
     return;
   }
 
-  if (allowed) {
-    message("account", "الحساب: " + user.email);
-    loadData();
-  }
-});
+  entries.forEach(([key, value]) => {
+    const actions = actionFactory ? actionFactory(key, value || {}) : [];
+    container.appendChild(
+      makeItem("معرّف السجل: " + key, value, actions)
+    );
+  });
+}
 
-el("loginForm").addEventListener("submit", async event => {
-  event.preventDefault();
-
-  const email = el("email").value.trim().toLowerCase();
-  const password = el("password").value;
+async function login() {
+  const email = document.getElementById("email").value.trim().toLowerCase();
+  const password = document.getElementById("password").value;
+  const btn = document.getElementById("loginBtn");
 
   if (email !== ADMIN_EMAIL) {
-    message("loginStatus", "استعمل بريد الإدارة الصحيح.");
+    message("هذا الحساب غير مخوّل للإدارة.");
     return;
   }
 
-  message("loginStatus", "جارٍ التحقق من الحساب...");
-
+  btn.disabled = true;
   try {
     await auth.signInWithEmailAndPassword(email, password);
-    el("password").value = "";
   } catch (error) {
-    message("loginStatus", "فشل الدخول: " + error.message);
+    message("تعذر تسجيل الدخول. تحقق من البريد وكلمة المرور.");
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function logout() {
+  await auth.signOut();
+}
+
+auth.onAuthStateChanged(async user => {
+  if (user && user.email && user.email.toLowerCase() === ADMIN_EMAIL) {
+    currentUser = user;
+    document.getElementById("loginBox").classList.add("hidden");
+    document.getElementById("dashboard").classList.remove("hidden");
+    document.getElementById("welcome").textContent =
+      "تم تسجيل الدخول بصفتك: " + user.email;
+    await loadAll();
+  } else {
+    currentUser = null;
+    if (user) await auth.signOut();
+    document.getElementById("loginBox").classList.remove("hidden");
+    document.getElementById("dashboard").classList.add("hidden");
   }
 });
 
-el("refresh").addEventListener("click", loadData);
-el("logout").addEventListener("click", () => auth.signOut());
+async function readPath(path) {
+  const snapshot = await db.ref(path).once("value");
+  return snapshot.val() || {};
+}
+
+async function loadAll() {
+  if (!currentUser || currentUser.email.toLowerCase() !== ADMIN_EMAIL) return;
+
+  message("جارٍ تحميل البيانات...");
+  try {
+    const results = await Promise.all([
+      readPath("publicMerchants"),
+      readPath("privateMerchants"),
+      readPath("payments")
+    ]);
+
+    publicData = results[0];
+    privateData = results[1];
+    paymentData = results[2];
+
+    renderList("privateList", privateData, (key, value) => [
+      {
+        label: "قبول ونشر التاجر",
+        action: () => approveMerchant(key, value)
+      },
+      {
+        label: "رفض وحذف الطلب",
+        className: "danger",
+        action: () => deleteRecord("privateMerchants", key)
+      }
+    ]);
+
+    renderList("privateAllList", privateData, (key, value) => [
+      {
+        label: "حذف السجل الخاص",
+        className: "danger",
+        action: () => deleteRecord("privateMerchants", key)
+      }
+    ]);
+
+    renderList("publicList", publicData, (key, value) => [
+      {
+        label: "إلغاء النشر",
+        className: "secondary",
+        action: () => unpublishMerchant(key, value)
+      },
+      {
+        label: "حذف التاجر",
+        className: "danger",
+        action: () => deleteRecord("publicMerchants", key)
+      }
+    ]);
+
+    renderList("paymentsList", paymentData, (key, value) => [
+      {
+        label: "حذف سجل الدفع",
+        className: "danger",
+        action: () => deleteRecord("payments", key)
+      }
+    ]);
+
+    message("تم تحميل البيانات.");
+  } catch (error) {
+    message("تعذر تحميل البيانات. تحقق من الاتصال وقواعد Firebase.");
+  }
+}
+
+async function approveMerchant(key, value) {
+  if (!confirm("هل حصلت على موافقة التاجر على نشر بياناته؟")) return;
+  if (!currentUser || currentUser.email.toLowerCase() !== ADMIN_EMAIL) return;
+
+  try {
+    const approved = Object.assign({}, value, {
+      approved: true,
+      publishedAt: new Date().toISOString()
+    });
+
+    await db.ref("publicMerchants/" + key).set(approved);
+    await db.ref("privateMerchants/" + key).remove();
+    message("تم قبول التاجر ونشر بياناته.");
+    await loadAll();
+  } catch (error) {
+    message("تعذر قبول التاجر. لم يتم تأكيد العملية.");
+  }
+}
+
+async function unpublishMerchant(key, value) {
+  if (!confirm("هل تريد نقل التاجر من القائمة العامة إلى البيانات الخاصة؟")) return;
+  if (!currentUser || currentUser.email.toLowerCase() !== ADMIN_EMAIL) return;
+
+  try {
+    await db.ref("privateMerchants/" + key).set(value);
+    await db.ref("publicMerchants/" + key).remove();
+    message("تم إلغاء النشر.");
+    await loadAll();
+  } catch (error) {
+    message("تعذر إلغاء النشر.");
+  }
+}
+
+async function deleteRecord(path, key) {
+  if (!confirm("هل أنت متأكد من حذف هذا السجل نهائيًا؟")) return;
+  if (!currentUser || currentUser.email.toLowerCase() !== ADMIN_EMAIL) return;
+
+  try {
+    await db.ref(path + "/" + key).remove();
+    message("تم حذف السجل.");
+    await loadAll();
+  } catch (error) {
+    message("تعذر حذف السجل.");
+  }
+}
+
+async function addMerchant(event) {
+  event.preventDefault();
+  if (!currentUser || currentUser.email.toLowerCase() !== ADMIN_EMAIL) return;
+
+  const consent = document.getElementById("merchantConsent").checked;
+  if (!consent) {
+    message("يجب تأكيد موافقة التاجر قبل النشر.");
+    return;
+  }
+
+  const merchant = {
+    name: document.getElementById("merchantName").value.trim(),
+    wilaya: document.getElementById("merchantWilaya").value.trim(),
+    type: document.getElementById("merchantType").value.trim(),
+    phone: document.getElementById("merchantPhone").value.trim(),
+    address: document.getElementById("merchantAddress").value.trim(),
+    description: document.getElementById("merchantDescription").value.trim(),
+    approved: true,
+    consentConfirmed: true,
+    publishedAt: new Date().toISOString()
+  };
+
+  try {
+    await db.ref("publicMerchants").push(merchant);
+    event.target.reset();
+    message("تم نشر التاجر.");
+    await loadAll();
+  } catch (error) {
+    message("تعذر نشر التاجر. تحقق من قواعد Firebase.");
+  }
+}
+
+async function addPayment(event) {
+  event.preventDefault();
+  if (!currentUser || currentUser.email.toLowerCase() !== ADMIN_EMAIL) return;
+
+  const payment = {
+    merchantName: document.getElementById("payMerchant").value.trim(),
+    amountDZD: Number(document.getElementById("payAmount").value),
+    date: document.getElementById("payDate").value,
+    status: document.getElementById("payStatus").value,
+    note: document.getElementById("payNote").value.trim(),
+    createdAt: new Date().toISOString()
+  };
+
+  try {
+    await db.ref("payments").push(payment);
+    event.target.reset();
+    document.getElementById("payAmount").value = 500;
+    message("تم حفظ سجل الدفع.");
+    await loadAll();
+  } catch (error) {
+    message("تعذر حفظ سجل الدفع.");
+  }
+}
+
+document.getElementById("payDate").value =
+  new Date().toISOString().slice(0, 10);
 </script>
 </body>
 </html>
