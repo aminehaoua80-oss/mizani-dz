@@ -1,38 +1,1189 @@
 
-<section id="payment" style="background:#edf1e9">
-  <div class="container">
-    <div class="section-title">
-      <h2>الاشتراك والدفع</h2>
-      <p>اشتراك التاجر: 500 دج شهريًا</p>
-    </div>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173f35">
+  <meta name="description" content="ميزاني - منصتك للعثور على تجار الموازين في الجزائر. ابحث عن الميزان المناسب وتواصل مع التاجر مباشرة.">
+  <title>ميزاني | ميزانك عندنا</title>
 
-    <div class="card" style="max-width:650px;margin:auto">
-      <h3>الدفع عبر CCP / RIP</h3>
-      <p>رقم RIP الخاص بميزاني:</p>
+  <style>
+    :root {
+      --green: #173f35;
+      --green-light: #28634f;
+      --gold: #e6b85c;
+      --cream: #f7f6f0;
+      --white: #ffffff;
+      --text: #26352f;
+      --muted: #69776f;
+      --border: #e3e8e1;
+      --shadow: 0 8px 28px rgba(23, 63, 53, 0.08);
+    }
 
-      <div style="background:#f6f5ef;padding:15px;border-radius:10px;
-                  direction:ltr;text-align:center;font-weight:bold;
-                  font-size:19px;overflow-wrap:anywhere">
-        00799999001220391835
-      </div>
+    * {
+      box-sizing: border-box;
+    }
 
-      <button class="btn btn-green btn-full"
-        type="button"
-        onclick="navigator.clipboard.writeText('00799999001220391835').then(()=>alert('تم نسخ رقم RIP'))">
-        نسخ رقم RIP
-      </button>
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 85px;
+    }
 
-      <p>بعد تحويل 500 دج، احتفظ بإيصال العملية وأرسله عبر واتساب.</p>
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.8;
+    }
 
-      <a class="btn btn-wa btn-full"
-         href="https://wa.me/213557619186?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%AD%D9%88%D9%84%D8%AA%20%D9%85%D8%A8%D9%84%D8%BA%20500%20%D8%AF%D8%AC%20%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D9%83%20%D9%85%D9%8A%D8%B2%D8%A7%D9%86%D9%8A.%20%D8%B3%D8%A3%D8%B1%D8%B3%D9%84%20%D8%A5%D9%8A%D8%B5%D8%A7%D9%84%20%D8%A7%D9%84%D8%AA%D8%AD%D9%88%D9%8A%D9%84."
-         target="_blank" rel="noopener noreferrer">
-        إرسال إثبات الدفع عبر واتساب
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button,
+    .btn {
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--green);
+      font-size: 23px;
+      font-weight: 800;
+    }
+
+    .brand-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 13px;
+      background: var(--green);
+      color: var(--gold);
+      display: grid;
+      place-items: center;
+      font-size: 25px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .nav-links a:hover {
+      color: var(--green-light);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 19px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      font-weight: bold;
+      text-align: center;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.92;
+    }
+
+    .btn-green {
+      background: var(--green);
+      color: white;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #26352f;
+    }
+
+    .btn-outline {
+      border-color: var(--green);
+      color: var(--green);
+      background: transparent;
+    }
+
+    .btn-wa {
+      background: #168b55;
+      color: white;
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 10% 15%, rgba(230,184,92,.16), transparent 32%),
+        linear-gradient(135deg, #173f35, #245847);
+      color: white;
+      padding: 76px 0 70px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 45px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 5px 13px;
+      border: 1px solid rgba(230,184,92,.6);
+      border-radius: 30px;
+      color: var(--gold);
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 51px);
+      line-height: 1.4;
+      margin: 8px 0 15px;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+    }
+
+    .hero p {
+      max-width: 620px;
+      color: #e3ece6;
+      font-size: 17px;
+      margin-bottom: 27px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-visual {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 25px;
+      min-height: 260px;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .scale-symbol {
+      font-size: 100px;
+      line-height: 1.2;
+      filter: drop-shadow(0 10px 15px rgba(0,0,0,.15));
+    }
+
+    .hero-visual strong {
+      color: var(--gold);
+      font-size: 23px;
+      margin-top: 12px;
+    }
+
+    .hero-visual span {
+      color: #e3ece6;
+      font-size: 14px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: -25px;
+      position: relative;
+    }
+
+    .stat {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      text-align: center;
+      padding: 20px 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--green);
+      font-size: 22px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    section {
+      padding: 68px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .section-title h2 {
+      margin: 0 0 8px;
+      color: var(--green);
+      font-size: clamp(25px, 4vw, 34px);
+    }
+
+    .section-title p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .search-panel {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr auto;
+      gap: 12px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      min-width: 0;
+      padding: 12px;
+      border: 1px solid #dce3dc;
+      border-radius: 9px;
+      background: #fff;
+      outline: none;
+      color: var(--text);
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--green-light);
+      box-shadow: 0 0 0 3px rgba(40,99,79,.1);
+    }
+
+    .search-button {
+      align-self: end;
+      min-height: 47px;
+    }
+
+    .merchant-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .merchant-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .merchant-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .merchant-icon {
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: #edf3eb;
+      font-size: 27px;
+    }
+
+    .merchant-card h3 {
+      margin: 0;
+      color: var(--green);
+      font-size: 18px;
+    }
+
+    .merchant-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    .merchant-tag {
+      display: inline-block;
+      align-self: flex-start;
+      border-radius: 20px;
+      padding: 4px 10px;
+      background: #f5eedc;
+      color: #775819;
+      font-size: 12px;
+    }
+
+    .merchant-card .btn {
+      margin-top: auto;
+    }
+
+    .empty-state {
+      background: white;
+      border: 1px dashed #cbd6ca;
+      border-radius: 17px;
+      padding: 38px 20px;
+      text-align: center;
+      color: var(--muted);
+      grid-column: 1 / -1;
+    }
+
+    .empty-state .empty-icon {
+      font-size: 42px;
+      margin-bottom: 8px;
+    }
+
+    .empty-state h3 {
+      color: var(--green);
+      margin: 0 0 8px;
+    }
+
+    .join-section {
+      background: #edf1e9;
+    }
+
+    .join-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      align-items: stretch;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      color: var(--green);
+      margin-top: 0;
+    }
+
+    .feature-list {
+      padding: 0;
+      list-style: none;
+      margin: 18px 0 24px;
+    }
+
+    .feature-list li {
+      margin: 10px 0;
+    }
+
+    .feature-list li::before {
+      content: "✓";
+      color: var(--green-light);
+      font-weight: bold;
+      margin-left: 9px;
+    }
+
+    .price {
+      font-size: 35px;
+      font-weight: 800;
+      color: var(--green);
+      margin: 10px 0;
+    }
+
+    .price small {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: normal;
+    }
+
+    .notice {
+      border-right: 4px solid var(--gold);
+      background: #fff9e9;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: #65552d;
+      margin-top: 16px;
+    }
+
+    .payment-number {
+      direction: ltr;
+      text-align: center;
+      overflow-wrap: anywhere;
+      background: #f6f5ef;
+      border: 1px dashed #c8d0c5;
+      padding: 17px 10px;
+      border-radius: 10px;
+      font-size: clamp(17px, 3vw, 23px);
+      font-weight: bold;
+      letter-spacing: .5px;
+      margin: 14px 0;
+      color: var(--green);
+    }
+
+    .payment-actions {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .step {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 22px;
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--green);
+      color: var(--gold);
+      font-weight: bold;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .step h3 {
+      margin: 0 0 8px;
+      color: var(--green);
+    }
+
+    .step p {
+      color: var(--muted);
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .contact-box {
+      background: var(--green);
+      color: white;
+      padding: 35px 25px;
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    .contact-box h2 {
+      margin-top: 0;
+      font-size: 28px;
+    }
+
+    .contact-box p {
+      color: #e3ece6;
+    }
+
+    footer {
+      background: #102f28;
+      color: white;
+      padding: 25px 0;
+      text-align: center;
+    }
+
+    footer p {
+      margin: 5px 0;
+      font-size: 13px;
+      color: #d8e3dc;
+    }
+
+    .footer-brand {
+      color: var(--gold);
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 850px) {
+      .hero-grid,
+      .join-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 50px 0;
+      }
+
+      .hero-visual {
+        min-height: 210px;
+      }
+
+      .merchant-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .search-panel {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .search-button {
+        width: 100%;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .nav {
+        padding: 12px 0;
+        align-items: flex-start;
+      }
+
+      .brand {
+        font-size: 19px;
+      }
+
+      .brand-icon {
+        width: 39px;
+        height: 39px;
+      }
+
+      .nav-links {
+        justify-content: flex-end;
+        gap: 8px 12px;
+        font-size: 12px;
+      }
+
+      .nav-links .btn {
+        padding: 7px 10px;
+      }
+
+      .hero h1 {
+        font-size: 33px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .stats {
+        gap: 8px;
+      }
+
+      .stat {
+        padding: 14px 6px;
+      }
+
+      .stat strong {
+        font-size: 18px;
+      }
+
+      .stat span {
+        font-size: 11px;
+      }
+
+      .merchant-grid,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .search-panel {
+        grid-template-columns: 1fr;
+        padding: 15px;
+      }
+
+      section {
+        padding: 50px 0;
+      }
+
+      .card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container nav">
+      <a href="#home" class="brand" aria-label="ميزاني - الصفحة الرئيسية">
+        <span class="brand-icon">⚖</span>
+        <span>ميزاني</span>
       </a>
 
-      <p class="muted">
-        لا يُفعّل الاشتراك ولا يُنشر الإعلان إلا بعد التحقق اليدوي من وصول المبلغ والبيانات.
-      </p>
+      <nav class="nav-links" aria-label="القائمة الرئيسية">
+        <a href="#home">الرئيسية</a>
+        <a href="#directory">التجار</a>
+        <a href="#how">كيف يعمل؟</a>
+        <a href="#payment">الاشتراك</a>
+        <a href="#join" class="btn btn-green">انضم كتاجر</a>
+      </nav>
     </div>
-  </div>
-</section>
+  </header>
+
+  <main>
+
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">منصتك للموازين في الجزائر</span>
+          <h1>تبحث عن ميزان؟<br><span>ميزانك عندنا</span></h1>
+          <p>
+            ميزاني تساعدك في العثور على تجار الموازين والتواصل معهم.
+            ابحث عن النوع الذي تحتاجه واكتشف الإعلانات المنشورة على المنصة.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#directory" class="btn btn-gold">اكتشف التجار ←</a>
+            <a href="#join" class="btn btn-outline"
+               style="color:white;border-color:rgba(255,255,255,.6)">
+              سجّل محلك
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="scale-symbol">⚖️</div>
+          <strong>ميزاني</strong>
+          <span>ميزانك عندنا</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="container stats">
+      <div class="stat">
+        <strong>48 ولاية</strong>
+        <span>نستهدف خدمة كامل الجزائر</span>
+      </div>
+      <div class="stat">
+        <strong>بحث سهل</strong>
+        <span>حسب الولاية ونوع الميزان</span>
+      </div>
+      <div class="stat">
+        <strong>500 دج</strong>
+        <span>اشتراك التاجر الشهري</span>
+      </div>
+    </div>
+
+    <section id="directory">
+      <div class="container">
+        <div class="section-title">
+          <h2>دليل تجار الموازين</h2>
+          <p>ابحث عن التاجر أو نوع الميزان أو الولاية التي تناسبك.</p>
+        </div>
+
+        <div class="search-panel">
+          <div class="field">
+            <label for="searchName">اسم التاجر أو نوع الميزان</label>
+            <input id="searchName" type="search"
+                   placeholder="مثال: موازين إلكترونية">
+          </div>
+
+          <div class="field">
+            <label for="wilayaFilter">الولاية</label>
+            <select id="wilayaFilter">
+              <option value="">كل الولايات</option>
+              <option>أدرار</option>
+              <option>الشلف</option>
+              <option>الأغواط</option>
+              <option>أم البواقي</option>
+              <option>باتنة</option>
+              <option>بجاية</option>
+              <option>بسكرة</option>
+              <option>بشار</option>
+              <option>البليدة</option>
+              <option>البويرة</option>
+              <option>تمنراست</option>
+              <option>تبسة</option>
+              <option>تلمسان</option>
+              <option>تيارت</option>
+              <option>تيزي وزو</option>
+              <option>الجزائر</option>
+              <option>الجلفة</option>
+              <option>جيجل</option>
+              <option>سطيف</option>
+              <option>سعيدة</option>
+              <option>سكيكدة</option>
+              <option>سيدي بلعباس</option>
+              <option>عنابة</option>
+              <option>قالمة</option>
+              <option>قسنطينة</option>
+              <option>المدية</option>
+              <option>مستغانم</option>
+              <option>المسيلة</option>
+              <option>معسكر</option>
+              <option>ورقلة</option>
+              <option>وهران</option>
+              <option>البيض</option>
+              <option>إليزي</option>
+              <option>برج بوعريريج</option>
+              <option>بومرداس</option>
+              <option>الطارف</option>
+              <option>تندوف</option>
+              <option>تيسمسيلت</option>
+              <option>الوادي</option>
+              <option>خنشلة</option>
+              <option>سوق أهراس</option>
+              <option>تيبازة</option>
+              <option>ميلة</option>
+              <option>عين الدفلى</option>
+              <option>النعامة</option>
+              <option>عين تموشنت</option>
+              <option>غرداية</option>
+              <option>غليزان</option>
+              <option>تيميمون</option>
+              <option>برج باجي مختار</option>
+              <option>أولاد جلال</option>
+              <option>بني عباس</option>
+              <option>عين صالح</option>
+              <option>عين قزام</option>
+              <option>تقرت</option>
+              <option>جانت</option>
+              <option>المغير</option>
+              <option>المنيعة</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="typeFilter">نوع الميزان</label>
+            <select id="typeFilter">
+              <option value="">كل الأنواع</option>
+              <option>موازين إلكترونية</option>
+              <option>موازين تجارية</option>
+              <option>موازين صناعية</option>
+              <option>موازين الشاحنات</option>
+              <option>موازين مخبرية</option>
+              <option>موازين طبية</option>
+              <option>موازين أخرى</option>
+            </select>
+          </div>
+
+          <button id="searchButton" class="btn btn-green search-button"
+                  type="button">بحث</button>
+        </div>
+
+        <div id="merchantResults" class="merchant-grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="join-section" id="join">
+      <div class="container">
+        <div class="section-title">
+          <h2>هل أنت تاجر موازين؟</h2>
+          <p>انضم إلى ميزاني واعرض نشاطك أمام العملاء المهتمين.</p>
+        </div>
+
+        <div class="join-grid">
+          <div class="card">
+            <h3>لماذا تنضم إلى ميزاني؟</h3>
+            <ul class="feature-list">
+              <li>عرض اسم محلك ومعلومات الاتصال بك.</li>
+              <li>توضيح الولاية والعنوان الذي تعمل فيه.</li>
+              <li>ذكر أنواع الموازين التي توفرها.</li>
+              <li>تمكين العملاء من التواصل معك مباشرة.</li>
+            </ul>
+            <p class="muted">
+              لا يُنشر الإعلان إلا بعد مراجعة البيانات والتأكد من الاشتراك
+              وموافقة التاجر على نشر معلوماته.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>سجّل كتاجر</h3>
+            <div class="price">500 دج <small>/ شهر</small></div>
+            <p>اشتراك شهري مدفوع، دون فترة مجانية.</p>
+
+            <a class="btn btn-green btn-full"
+               href="https://docs.google.com/forms/d/e/1FAIpQLSf2_y0S3Z6-BTXEED1V1GVrpkM5J2fSp7CDuL0ZL-zjBMrheg/viewform?usp=dialog"
+               target="_blank" rel="noopener noreferrer">
+              تعبئة استمارة التسجيل
+            </a>
+
+            <div class="notice">
+              بعد إرسال الاستمارة، أتمم دفع الاشتراك وأرسل إثبات الدفع
+              عبر واتساب. سيُراجع طلبك يدويًا قبل نشر إعلانك.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="payment">
+      <div class="container">
+        <div class="section-title">
+          <h2>الاشتراك والدفع</h2>
+          <p>قيمة الاشتراك 500 دج لمدة شهر واحد.</p>
+        </div>
+
+        <div class="card" style="max-width:650px;margin:auto">
+          <h3>الدفع عبر CCP / RIP</h3>
+
+          <p>رقم RIP الذي زودتنا به:</p>
+
+          <div class="payment-number" id="ripNumber">
+            00799999001220391835
+          </div>
+
+          <button id="copyRipButton" class="btn btn-green btn-full"
+                  type="button">
+            نسخ رقم RIP
+          </button>
+
+          <div class="notice">
+            قبل التحويل، تأكد من بيانات المستفيد في تطبيق أو خدمة الدفع
+            التي تستعملها. لا ترسل أموالًا إذا كانت بيانات المستفيد لا تطابق
+            الجهة المقصودة.
+          </div>
+
+          <div class="payment-actions">
+            <a class="btn btn-wa btn-full"
+               href="https://wa.me/213557619186?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D9%83%20%D9%81%D9%8A%20%D9%85%D9%8A%D8%B2%D8%A7%D9%86%D9%8A%20%D8%A8%D9%85%D8%A8%D9%84%D8%BA%20500%20%D8%AF%D8%AC.%20%D8%B3%D8%A3%D8%B1%D8%B3%D9%84%20%D8%A5%D8%AB%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AF%D9%81%D8%B9."
+               target="_blank" rel="noopener noreferrer">
+              إرسال إثبات الدفع عبر واتساب
+            </a>
+
+            <a class="btn btn-outline btn-full"
+               href="https://docs.google.com/forms/d/e/1FAIpQLSf2_y0S3Z6-BTXEED1V1GVrpkM5J2fSp7CDuL0ZL-zjBMrheg/viewform?usp=dialog"
+               target="_blank" rel="noopener noreferrer">
+              العودة إلى استمارة التسجيل
+            </a>
+          </div>
+
+          <p class="muted" style="margin-top:18px">
+            إرسال الإيصال لا يعني تفعيل الاشتراك تلقائيًا.
+            تتم مراجعة الدفع والبيانات يدويًا، ثم يُنشر الإعلان بعد الموافقة.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" style="background:#edf1e9">
+      <div class="container">
+        <div class="section-title">
+          <h2>كيف تعمل ميزاني؟</h2>
+          <p>خطوات بسيطة للتاجر والعميل.</p>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>سجّل نشاطك</h3>
+            <p>يملأ التاجر الاستمارة بمعلومات المحل وأنواع الموازين.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>أكمل الاشتراك</h3>
+            <p>يدفع التاجر 500 دج ويرسل إثبات الدفع للمراجعة.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>انشر إعلانك</h3>
+            <p>بعد التحقق والموافقة، يُضاف الإعلان إلى دليل التجار.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <h2>تواصل مع ميزاني</h2>
+          <p>للاستفسار عن التسجيل والاشتراك والإعلانات.</p>
+          <a class="btn btn-gold"
+             href="https://wa.me/213557619186"
+             target="_blank" rel="noopener noreferrer">
+            تواصل معنا عبر واتساب
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-brand">ميزاني — ميزانك عندنا</div>
+      <p>منصة للتعريف بتجار الموازين في الجزائر.</p>
+      <p>© <span id="currentYear"></span> ميزاني. جميع الحقوق محفوظة.</p>
+    </div>
+  </footer>
+
+  <script>
+    "use strict";
+
+    /*
+      أضف إعلانات التجار المعتمدة داخل المصفوفة التالية.
+      لا تضف بيانات تاجر دون موافقته على نشرها.
+      مثال:
+
+      {
+        name: "اسم المحل",
+        owner: "اسم صاحب المحل (اختياري)",
+        wilaya: "الجزائر",
+        address: "عنوان المحل",
+        phone: "0550000000",
+        types: ["موازين إلكترونية", "موازين تجارية"],
+        description: "معلومات إضافية عن المحل"
+      }
+    */
+
+    const merchants = [];
+
+    const resultsElement = document.getElementById("merchantResults");
+    const searchInput = document.getElementById("searchName");
+    const wilayaSelect = document.getElementById("wilayaFilter");
+    const typeSelect = document.getElementById("typeFilter");
+    const searchButton = document.getElementById("searchButton");
+
+    function normalizeText(value) {
+      return String(value || "")
+        .toLocaleLowerCase("ar")
+        .trim();
+    }
+
+    function createElement(tag, className, text) {
+      const element = document.createElement(tag);
+
+      if (className) {
+        element.className = className;
+      }
+
+      if (text !== undefined) {
+        element.textContent = text;
+      }
+
+      return element;
+    }
+
+    function renderMerchants() {
+      const query = normalizeText(searchInput.value);
+      const selectedWilaya = wilayaSelect.value;
+      const selectedType = typeSelect.value;
+
+      const filtered = merchants.filter(function (merchant) {
+        const searchable = normalizeText([
+          merchant.name,
+          merchant.owner,
+          merchant.wilaya,
+          merchant.address,
+          merchant.description,
+          ...(Array.isArray(merchant.types) ? merchant.types : [])
+        ].join(" "));
+
+        const matchesQuery = !query || searchable.includes(query);
+        const matchesWilaya =
+          !selectedWilaya || merchant.wilaya === selectedWilaya;
+
+        const types = Array.isArray(merchant.types)
+          ? merchant.types
+          : [];
+
+        const matchesType =
+          !selectedType || types.includes(selectedType);
+
+        return matchesQuery && matchesWilaya && matchesType;
+      });
+
+      resultsElement.replaceChildren();
+
+      if (filtered.length === 0) {
+        const empty = createElement("div", "empty-state");
+        empty.appendChild(createElement("div", "empty-icon", "⚖️"));
+
+        const title = createElement(
+          "h3",
+          "",
+          merchants.length === 0
+            ? "قريبًا ستجد التجار هنا"
+            : "لم نعثر على نتائج مطابقة"
+        );
+
+        const message = createElement(
+          "p",
+          "",
+          merchants.length === 0
+            ? "لم تُنشر إعلانات التجار بعد. نعمل على استقبال الطلبات ومراجعتها."
+            : "جرّب تغيير عبارة البحث أو اختيار ولاية أو نوع آخر."
+        );
+
+        empty.appendChild(title);
+        empty.appendChild(message);
+
+        resultsElement.appendChild(empty);
+        return;
+      }
+
+      filtered.forEach(function (merchant) {
+        const card = createElement("article", "merchant-card");
+        const top = createElement("div", "merchant-top");
+        const icon = createElement("div", "merchant-icon", "⚖️");
+        const heading = createElement("div");
+        const name = createElement("h3", "", merchant.name || "تاجر موازين");
+
+        heading.appendChild(name);
+        top.appendChild(icon);
+        top.appendChild(heading);
+        card.appendChild(top);
+
+        if (merchant.wilaya) {
+          card.appendChild(
+            createElement("span", "merchant-tag", merchant.wilaya)
+          );
+        }
+
+        if (merchant.address) {
+          card.appendChild(
+            createElement("p", "", "📍 " + merchant.address)
+          );
+        }
+
+        if (Array.isArray(merchant.types) && merchant.types.length) {
+          card.appendChild(
+            createElement("p", "", "⚖️ " + merchant.types.join("، "))
+          );
+        }
+
+        if (merchant.description) {
+          card.appendChild(
+            createElement("p", "", merchant.description)
+          );
+        }
+
+        if (merchant.phone) {
+          const phone = String(merchant.phone).replace(/[^\d+]/g, "");
+          const whatsappNumber = phone.replace(/\D/g, "");
+
+          if (whatsappNumber) {
+            const contact = createElement(
+              "a",
+              "btn btn-wa btn-full",
+              "تواصل مع التاجر عبر واتساب"
+            );
+
+            contact.href = "https://wa.me/" + whatsappNumber;
+            contact.target = "_blank";
+            contact.rel = "noopener noreferrer";
+
+            card.appendChild(contact);
+          }
+        }
+
+        resultsElement.appendChild(card);
+      });
+    }
+
+    searchButton.addEventListener("click", renderMerchants);
+    searchInput.addEventListener("input", renderMerchants);
+    wilayaSelect.addEventListener("change", renderMerchants);
+    typeSelect.addEventListener("change", renderMerchants);
+
+    document.getElementById("currentYear").textContent =
+      new Date().getFullYear();
+
+    document.getElementById("copyRipButton").addEventListener(
+      "click",
+      async function () {
+        const rip = "00799999001220391835";
+        const button = this;
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(rip);
+          } else {
+            const temporaryInput = document.createElement("textarea");
+            temporaryInput.value = rip;
+            temporaryInput.setAttribute("readonly", "");
+            temporaryInput.style.position = "fixed";
+            temporaryInput.style.opacity = "0";
+
+            document.body.appendChild(temporaryInput);
+            temporaryInput.select();
+
+            const copied = document.execCommand("copy");
+            temporaryInput.remove();
+
+            if (!copied) {
+              throw new Error("تعذر النسخ");
+            }
+          }
+
+          button.textContent = "تم نسخ رقم RIP ✓";
+          setTimeout(function () {
+            button.textContent = "نسخ رقم RIP";
+          }, 2500);
+        } catch (error) {
+          window.prompt("انسخ رقم RIP التالي:", rip);
+        }
+      }
+    );
+
+    renderMerchants();
+  </script>
+
+</body>
+</html>
