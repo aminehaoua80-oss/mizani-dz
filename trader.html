@@ -5,59 +5,166 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>فضاء التاجر | ميزاني</title>
+
 <style>
-body{font-family:Arial,sans-serif;background:#f1f5f7;color:#17384a;margin:0}
-header{background:#123c55;color:white;text-align:center;padding:22px}
-main{max-width:600px;margin:auto;padding:15px}
-.card{background:white;border-radius:12px;padding:18px;margin:14px 0}
-input,button{box-sizing:border-box;width:100%;padding:13px;margin:7px 0;border-radius:8px;font-size:16px}
-input{border:1px solid #ccd6dd}
-button{border:0;background:#176b54;color:white;font-weight:bold}
-.secondary{background:#31566b}
-.note{background:#edf5f2;padding:12px;border-radius:8px;overflow-wrap:anywhere}
-.hidden{display:none}
+* { box-sizing: border-box; }
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f1f5f7;
+  color: #17384a;
+  margin: 0;
+}
+
+header {
+  background: #123c55;
+  color: white;
+  text-align: center;
+  padding: 22px;
+}
+
+main {
+  max-width: 600px;
+  margin: auto;
+  padding: 15px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 18px;
+  margin: 14px 0;
+  box-shadow: 0 2px 8px #0000000d;
+}
+
+input, button {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  margin: 8px 0;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+input { border: 1px solid #ccd6dd; }
+
+button {
+  border: 0;
+  background: #176b54;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.secondary { background: #31566b; }
+
+.note {
+  background: #edf5f2;
+  padding: 12px;
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+}
+
+.hidden { display: none; }
+
+#authMessage, #spaceMessage {
+  overflow-wrap: anywhere;
+  line-height: 1.7;
+}
 </style>
 </head>
+
 <body>
+
 <header>
-<h1>ميزاني</h1>
-<p>فضاء التاجر — ميزانك عندنا</p>
+  <h1>ميزاني</h1>
+  <p>فضاء التاجر — ميزانك عندنا</p>
 </header>
+
 <main>
+
 <section class="card" id="authBox">
-<h2>الدخول إلى فضاء التاجر</h2>
-<input id="email" type="email" placeholder="البريد الإلكتروني">
-<input id="password" type="password" placeholder="كلمة المرور">
-<button onclick="login()">تسجيل الدخول</button>
-<button class="secondary" onclick="register()">إنشاء حساب تاجر</button>
-<p id="authMessage"></p>
+  <h2>الدخول إلى فضاء التاجر</h2>
+
+  <p>إذا كنت تاجرًا جديدًا، أدخل اسمك وبريدك الإلكتروني لإنشاء حساب.</p>
+
+  <input
+    id="merchantName"
+    type="text"
+    placeholder="اسم التاجر أو المحل"
+    autocomplete="organization">
+
+  <input
+    id="email"
+    type="email"
+    placeholder="البريد الإلكتروني"
+    autocomplete="username">
+
+  <input
+    id="password"
+    type="password"
+    placeholder="كلمة المرور"
+    autocomplete="current-password">
+
+  <button onclick="login()">تسجيل الدخول</button>
+
+  <button class="secondary" onclick="register()">
+    إنشاء حساب تاجر جديد
+  </button>
+
+  <p id="authMessage" role="status"></p>
 </section>
 
 <section class="card hidden" id="space">
-<h2>مرحبًا بك في فضاء التاجر</h2>
-<p id="merchantEmail"></p>
-<p>الاشتراك الشهري: <strong>500 دج</strong></p>
 
-<div class="note">
-<h3>الدفع عبر RIP</h3>
-<p>رقم RIP:</p>
-<p><strong id="rip">00799999001220391835</strong></p>
-<button class="secondary" onclick="copyRIP()">نسخ رقم RIP</button>
-<p>حوّل مبلغ 500 دج، ثم تواصل معنا عبر واتساب لتأكيد التحويل.</p>
-</div>
+  <h2>مرحبًا بك في فضاء التاجر</h2>
 
-<h3>حالة اشتراكك</h3>
-<p id="status">جارٍ تحميل الحالة...</p>
+  <p>اسم التاجر: <strong id="displayName"></strong></p>
+  <p>البريد الإلكتروني: <span id="merchantEmail"></span></p>
 
-<button onclick="confirmPayment()">تأكيد التحويل عبر واتساب</button>
-<button class="secondary" onclick="logout()">تسجيل الخروج</button>
-<p id="spaceMessage"></p>
+  <hr>
+
+  <h3>اشتراك ميزاني</h3>
+  <p>قيمة الاشتراك الشهري: <strong>500 دج</strong></p>
+
+  <div class="note">
+    <h3>الدفع عبر RIP</h3>
+
+    <p>رقم الحساب البريدي:</p>
+
+    <p><strong id="rip">00799999001220391835</strong></p>
+
+    <button class="secondary" onclick="copyRIP()">
+      نسخ رقم RIP
+    </button>
+
+    <p>
+      بعد تحويل مبلغ الاشتراك، تواصل مع إدارة ميزاني عبر واتساب
+      لتأكيد التحويل والتحقق من وصول المبلغ.
+    </p>
+  </div>
+
+  <h3>حالة الاشتراك</h3>
+  <p id="status">جارٍ تحميل الحالة...</p>
+
+  <button onclick="confirmPayment()">
+    تأكيد التحويل عبر واتساب
+  </button>
+
+  <p id="spaceMessage" role="status"></p>
+
+  <button class="secondary" onclick="logout()">
+    تسجيل الخروج
+  </button>
+
 </section>
+
 </main>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
 <script>
 const firebaseConfig = {
   apiKey: "AIzaSyB2g8LEJkx0tEMek2wJtOnXc436VT3qeU0",
@@ -71,67 +178,122 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
 const auth = firebase.auth();
 const db = firebase.database();
+
 const ADMIN_EMAIL = "aminehaoua80@gmail.com";
 const RIP = "00799999001220391835";
 const WHATSAPP = "213557619186";
+
+let currentMerchant = null;
 
 function say(id, text) {
   document.getElementById(id).textContent = text;
 }
 
+function showMessage(text) {
+  say("authMessage", text);
+}
+
 async function login() {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
+
+  if (!email || !password) {
+    showMessage("أدخل البريد الإلكتروني وكلمة المرور.");
+    return;
+  }
+
   try {
     await auth.signInWithEmailAndPassword(email, password);
-    say("authMessage", "");
-  } catch (e) {
-    say("authMessage", "تعذر الدخول. تحقق من البريد وكلمة المرور.");
+    showMessage("");
+  } catch (error) {
+    showMessage("تعذر الدخول. تحقق من البريد الإلكتروني وكلمة المرور.");
   }
 }
 
 async function register() {
+  const name = document.getElementById("merchantName").value.trim();
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
-  if (password.length < 6) {
-    say("authMessage", "كلمة المرور يجب أن تتكون من 6 أحرف على الأقل.");
+
+  if (!name) {
+    showMessage("أدخل اسم التاجر أو المحل أولًا.");
     return;
   }
+
+  if (!email || !password) {
+    showMessage("أدخل البريد الإلكتروني وكلمة المرور.");
+    return;
+  }
+
+  if (password.length < 6) {
+    showMessage("كلمة المرور يجب أن تتكون من 6 أحرف على الأقل.");
+    return;
+  }
+
+  if (email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+    showMessage("هذا البريد مخصص للإدارة.");
+    return;
+  }
+
   try {
-    const result = await auth.createUserWithEmailAndPassword(email, password);
+    const result = await auth.createUserWithEmailAndPassword(
+      email,
+      password
+    );
+
     await db.ref("traders/" + result.user.uid).set({
+      name: name,
       email: result.user.email,
       subscriptionStatus: "pending",
       createdAt: new Date().toISOString()
     });
-    say("authMessage", "تم إنشاء الحساب. اشتراكك ينتظر مراجعة الإدارة.");
-  } catch (e) {
-    say("authMessage", "تعذر إنشاء الحساب. قد يكون البريد مستخدمًا أو إعدادات قاعدة البيانات غير جاهزة.");
+
+    showMessage("تم إنشاء الحساب. اشتراكك ينتظر مراجعة الإدارة.");
+  } catch (error) {
+    showMessage(
+      "تعذر إكمال التسجيل. تحقق من إعدادات Firebase أو من وجود الحساب مسبقًا. إذا كان الحساب قد أُنشئ بالفعل، فلا تكرر التسجيل قبل مراجعة الإدارة."
+    );
   }
 }
 
 auth.onAuthStateChanged(async user => {
-  const valid = user && user.email &&
+  const isTrader = user &&
+    user.email &&
     user.email.toLowerCase() !== ADMIN_EMAIL.toLowerCase();
 
-  document.getElementById("authBox").classList.toggle("hidden", !!valid);
-  document.getElementById("space").classList.toggle("hidden", !valid);
+  document.getElementById("authBox").classList.toggle(
+    "hidden", !!isTrader
+  );
 
-  if (!valid) return;
+  document.getElementById("space").classList.toggle(
+    "hidden", !isTrader
+  );
+
+  if (!isTrader) {
+    currentMerchant = null;
+    return;
+  }
+
+  currentMerchant = user;
 
   say("merchantEmail", user.email);
+  say("displayName", "جارٍ تحميل الاسم...");
   say("status", "جارٍ تحميل الحالة...");
 
   try {
-    const snap = await db.ref("traders/" + user.uid).once("value");
-    const profile = snap.val();
+    const snapshot = await db.ref("traders/" + user.uid).once("value");
+    const profile = snapshot.val();
 
     if (!profile) {
+      say("displayName", "غير مسجل");
       say("status", "لم يُعثر على ملف التاجر. تواصل مع الإدارة.");
       return;
     }
+
+    say("displayName", profile.name || "لم يُسجّل الاسم");
 
     const labels = {
       pending: "الحساب قيد المراجعة",
@@ -140,44 +302,79 @@ auth.onAuthStateChanged(async user => {
       expired: "الاشتراك منتهٍ"
     };
 
-    say("status", labels[profile.subscriptionStatus] ||
-      "حالة الاشتراك: " + profile.subscriptionStatus);
-  } catch (e) {
-    say("status", "تعذر تحميل الحالة. راجع إعدادات أمان Firebase.");
+    say(
+      "status",
+      labels[profile.subscriptionStatus] ||
+      "حالة الاشتراك: " + (profile.subscriptionStatus || "غير محددة")
+    );
+  } catch (error) {
+    say("status", "تعذر تحميل الحالة. تحقق من إعدادات Firebase.");
   }
 });
 
-function copyRIP() {
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(RIP)
-      .then(() => say("spaceMessage", "تم نسخ رقم RIP."));
-  } else {
-    say("spaceMessage", "رقم RIP: " + RIP);
+async function copyRIP() {
+  try {
+    await navigator.clipboard.writeText(RIP);
+    say("spaceMessage", "تم نسخ رقم RIP.");
+  } catch (error) {
+    say("spaceMessage", "يمكنك نسخ رقم RIP يدويًا: " + RIP);
   }
 }
 
 async function confirmPayment() {
   const user = auth.currentUser;
-  if (!user) return;
+
+  if (!user) {
+    say("spaceMessage", "سجّل الدخول أولًا.");
+    return;
+  }
 
   try {
-    await db.ref("paymentRequests/" + user.uid).push({
-      email: user.email,
+    const snapshot = await db.ref("traders/" + user.uid).once("value");
+    const profile = snapshot.val();
+
+    if (!profile) {
+      say("spaceMessage", "تعذر العثور على ملف التاجر.");
+      return;
+    }
+
+    const name = profile.name || "غير مسجل";
+    const email = user.email || "";
+
+    const request = {
+      name: name,
+      email: email,
       amountDZD: 500,
       status: "pending_verification",
       createdAt: new Date().toISOString()
-    });
+    };
 
-    const text = "السلام عليكم، أنا التاجر " + user.email +
-      ". قمت بتحويل اشتراك ميزاني بقيمة 500 دج عبر RIP، وأطلب التحقق من التحويل.";
-    const url = "https://wa.me/" + WHATSAPP +
-      "?text=" + encodeURIComponent(text);
+    await db.ref("paymentRequests/" + user.uid).push(request);
 
-    window.open(url, "_blank");
-    say("spaceMessage", "سُجل طلب التحقق. لن يُفعّل الاشتراك إلا بعد تأكيد الإدارة.");
-  } catch (e) {
-    say("spaceMessage", "تعذر تسجيل طلب التحقق. تواصل مع الإدارة عبر واتساب.");
-    window.open("https://wa.me/" + WHATSAPP, "_blank");
+    const message =
+      "السلام عليكم، إدارة ميزاني.\n\n" +
+      "اسم التاجر أو المحل: " + name + "\n" +
+      "البريد الإلكتروني: " + email + "\n" +
+      "قيمة الاشتراك: 500 دج شهريًا.\n\n" +
+      "أطلب التحقق من تحويل الاشتراك وتفعيل الحساب بعد التأكد من وصول المبلغ.\n\n" +
+      "شكرًا لكم.";
+
+    const url =
+      "https://wa.me/" + WHATSAPP +
+      "?text=" + encodeURIComponent(message);
+
+    say(
+      "spaceMessage",
+      "تم تسجيل طلب التحقق. افتح واتساب وأرسل الرسالة إلى الإدارة بعد التحويل الفعلي."
+    );
+
+    window.location.href = url;
+
+  } catch (error) {
+    say(
+      "spaceMessage",
+      "تعذر تسجيل طلب التحقق في قاعدة البيانات. يمكنك التواصل مع الإدارة عبر واتساب، لكن لم يتم تأكيد تسجيل الطلب."
+    );
   }
 }
 
@@ -185,5 +382,6 @@ async function logout() {
   await auth.signOut();
 }
 </script>
+
 </body>
 </html>
