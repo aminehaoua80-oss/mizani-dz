@@ -1,313 +1,737 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#123047">
-<title>ميزاني | ميزانك عندنا</title>
-<style>
-:root{--navy:#123047;--teal:#087e8b;--gold:#f3b544;--paper:#f4f7f9;--ink:#1b2933;--muted:#62727d;--line:#dbe4e8;--white:#fff;--green:#1b7b50}
-*{box-sizing:border-box}
-body{margin:0;font-family:Tahoma,Arial,sans-serif;background:var(--paper);color:var(--ink);line-height:1.65}
-button,input,select{font:inherit}
-button,a{cursor:pointer}
-a{text-decoration:none}
-.wrap{width:min(1100px,100% - 28px);margin:auto}
-header{background:linear-gradient(125deg,#102b3e,#176071);color:#fff;padding:18px 0 28px}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.brand{font-weight:900;font-size:27px;line-height:1.2}
-.brand span{color:var(--gold)}
-.tagline{font-size:12px;color:#d8e9ef}
-.navlinks{display:flex;gap:8px;flex-wrap:wrap}
-.navbtn{border:1px solid #7faab6;background:transparent;color:white;padding:8px 12px;border-radius:10px;font-weight:bold}
-.navbtn.active{background:var(--gold);border-color:var(--gold);color:#24333a}
-.hero{padding:28px 0 8px;max-width:800px}
-.hero h1{font-size:clamp(26px,5vw,42px);line-height:1.25;margin:8px 0}
-.hero p{color:#dceaf0;margin:8px 0 20px}
-.search{background:white;border-radius:16px;padding:12px;display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:8px;box-shadow:0 12px 25px #001c2a25}
-input,select{width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;background:white;color:var(--ink);min-width:0}
-.btn{border:0;border-radius:10px;padding:11px 15px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:6px}
-.gold{background:var(--gold);color:#26323a}
-.primary{background:var(--navy);color:white}
-.teal{background:var(--teal);color:white}
-.full{width:100%}
-main{padding:22px 0 42px}
-.panel{background:#fff;border:1px solid var(--line);border-radius:15px;padding:17px;margin-bottom:16px}
-.panel h2,.panel h3{margin:0 0 8px;color:var(--navy)}
-.muted{color:var(--muted);font-size:13px}
-.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:10px;flex-wrap:wrap;margin:6px 0 14px}
-.sectionhead h2{margin:0;color:var(--navy)}
-.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.card{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
-.visual{height:135px;display:grid;place-items:center;font-size:54px;background:linear-gradient(135deg,#e7f2f4,#fbf2df)}
-.cardbody{padding:14px}
-.pill{font-size:12px;border-radius:20px;padding:4px 9px;background:#e8f4f4;color:#08727d;display:inline-block}
-.card h3{font-size:17px;margin:9px 0 3px}
-.price{font-weight:900;font-size:18px;color:var(--teal)}
-.card .btn{width:100%;margin-top:10px}
-.hidden{display:none!important}
-.notice{padding:11px 13px;border-radius:10px;background:#fff7df;border:1px solid #f1d88f;color:#634c0b;font-size:13px;margin:10px 0}
-.how{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.how div{padding:13px;background:#f6fafb;border-radius:12px}
-.how b{color:var(--teal)}
-.ripbox{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
-.ripbox input{flex:1;min-width:220px;font-weight:900;letter-spacing:.5px;text-align:center;font-size:17px}
-.success{color:var(--green);font-weight:bold;font-size:13px;min-height:22px}
-footer{background:#0e293a;color:#dce8ed;padding:22px 0;font-size:13px}
-@media(max-width:760px){
-.search{grid-template-columns:1fr 1fr}
-.search .btn{grid-column:1/-1}
-.cards{grid-template-columns:1fr 1fr}
-.how{grid-template-columns:1fr}
-.nav{align-items:flex-start}
-}
-@media(max-width:480px){
-.cards{grid-template-columns:1fr}
-.brand{font-size:24px}
-.wrap{width:calc(100% - 22px)}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#123b35">
+  <meta name="description" content="ميزاني - منصة لربط الزبائن بتجار الموازين في الجزائر. ميزانك عندنا.">
+  <title>ميزاني | ميزانك عندنا</title>
+
+  <style>
+    :root {
+      --green: #123b35;
+      --green2: #1e6655;
+      --gold: #f0bd55;
+      --cream: #f6f5ef;
+      --white: #ffffff;
+      --text: #1e2926;
+      --muted: #687570;
+      --border: #e2e7e2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--text);
+      font-family: Tahoma, Arial, sans-serif;
+      line-height: 1.8;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+    }
+
+    button, .btn {
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: auto;
+    }
+
+    header {
+      background: var(--green);
+      color: white;
+      padding: 14px 0;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .logo {
+      width: 45px;
+      height: 45px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: var(--gold);
+      color: var(--green);
+      font-size: 25px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 17px;
+      flex-wrap: wrap;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #123b35, #26735e);
+      color: white;
+      padding: 65px 0;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1.4fr 0.8fr;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 48px);
+      line-height: 1.4;
+      margin: 8px 0;
+    }
+
+    .hero p {
+      color: #e3eee8;
+      font-size: 17px;
+    }
+
+    .tag {
+      display: inline-block;
+      color: var(--green);
+      background: var(--gold);
+      padding: 5px 13px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 22px;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .hero-icon {
+      font-size: 76px;
+      line-height: 1.4;
+    }
+
+    .btn {
+      display: inline-block;
+      border: 0;
+      border-radius: 11px;
+      padding: 11px 18px;
+      font-weight: bold;
+      text-align: center;
+      transition: opacity .2s;
+    }
+
+    .btn:hover {
+      opacity: .88;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--green);
+    }
+
+    .btn-green {
+      background: var(--green);
+      color: white;
+    }
+
+    .btn-light {
+      background: white;
+      color: var(--green);
+      border: 1px solid var(--border);
+    }
+
+    .btn-whatsapp {
+      background: #168b52;
+      color: white;
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+
+    section {
+      padding: 42px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .section-title h2 {
+      color: var(--green);
+      margin: 0 0 7px;
+      font-size: 27px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      padding: 22px;
+      box-shadow: 0 4px 15px rgba(20, 45, 35, .035);
+    }
+
+    .card h3 {
+      color: var(--green);
+      margin-top: 0;
+    }
+
+    .card-icon {
+      font-size: 36px;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .notice {
+      border-right: 4px solid var(--gold);
+      background: #fff9e9;
+      padding: 13px 15px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .price {
+      font-size: 36px;
+      font-weight: bold;
+      color: var(--green);
+    }
+
+    .price small {
+      font-size: 15px;
+      font-weight: normal;
+    }
+
+    .field {
+      margin-bottom: 14px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d7ded8;
+      border-radius: 9px;
+      background: white;
+      color: var(--text);
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      outline: 2px solid #a8d3bf;
+      border-color: var(--green2);
+    }
+
+    .rip {
+      direction: ltr;
+      text-align: center;
+      font-size: 21px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      overflow-wrap: anywhere;
+      background: #f2f6f2;
+      border: 1px dashed #98b3a4;
+      padding: 15px 10px;
+      border-radius: 10px;
+      margin: 12px 0;
+    }
+
+    .steps {
+      counter-reset: step;
+      padding: 0;
+      list-style: none;
+    }
+
+    .steps li {
+      counter-increment: step;
+      position: relative;
+      padding: 7px 42px 7px 0;
+    }
+
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      right: 0;
+      top: 7px;
+      width: 29px;
+      height: 29px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green);
+      color: white;
+      font-weight: bold;
+    }
+
+    .demo-label {
+      display: inline-block;
+      background: #fff1cf;
+      color: #79551a;
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 12px;
+    }
+
+    .faq details {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--green);
+    }
+
+    footer {
+      background: #0d2e29;
+      color: white;
+      padding: 30px 0;
+      text-align: center;
+    }
+
+    footer a {
+      color: var(--gold);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin: 15px 0;
+    }
+
+    .small {
+      font-size: 12px;
+      color: #c8d8d0;
+    }
+
+    .floating-wa {
+      position: fixed;
+      bottom: 18px;
+      left: 16px;
+      z-index: 10;
+      border-radius: 30px;
+      box-shadow: 0 4px 16px #0002;
+    }
+
+    @media (max-width: 750px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        gap: 10px 14px;
+      }
+
+      .hero {
+        padding: 42px 0;
+      }
+
+      .rip {
+        font-size: 17px;
+      }
+    }
+  </style>
 </head>
+
 <body>
+
 <header>
- <div class="wrap">
-  <div class="nav">
-   <div>
-    <div class="brand">ميزاني <span>⚖</span></div>
-    <div class="tagline">ميزانك عندنا — دليل الموازين في الجزائر</div>
-   </div>
-   <div class="navlinks">
-    <button class="navbtn active" data-page="customer">الزبائن</button>
-    <button class="navbtn" data-page="merchant">فضاء التاجر</button>
-    <button class="navbtn" data-page="admin">متابعة الطلبات</button>
-   </div>
+  <div class="container nav">
+    <a href="#home" class="brand" style="color:white">
+      <span class="logo">⚖</span>
+      <span>ميزاني</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="#home">الرئيسية</a>
+      <a href="#services">خدماتنا</a>
+      <a href="#merchants">للتجار</a>
+      <a href="#join">طلب الانضمام</a>
+      <a href="#contact">اتصل بنا</a>
+    </nav>
   </div>
-  <div class="hero" id="hero">
-   <h1>اعثر على الميزان المناسب لنشاطك</h1>
-   <p>دليل متخصص يربط الزبائن بتجار الموازين في الجزائر. قارن الأنواع وتواصل مع التاجر مباشرة.</p>
-   <div class="search">
-    <input id="q" placeholder="ابحث عن نوع الميزان أو اسمه" aria-label="بحث">
-    <select id="type">
-     <option value="">كل الأنواع</option>
-     <option>ميزان إلكتروني</option>
-     <option>ميزان تجاري</option>
-     <option>ميزان صناعي</option>
-     <option>ميزان حساس</option>
-     <option>ميزان شاحنات</option>
-    </select>
-    <select id="wilaya">
-     <option value="">كل الولايات</option>
-     <option>الجزائر</option>
-     <option>البليدة</option>
-     <option>وهران</option>
-     <option>سطيف</option>
-     <option>قسنطينة</option>
-    </select>
-    <button class="btn gold" id="searchBtn">ابحث</button>
-   </div>
-  </div>
- </div>
 </header>
 
-<main class="wrap">
- <section id="page-customer">
-  <div class="sectionhead">
-   <div>
-    <h2>عروض الموازين</h2>
-    <div class="muted">عروض نموذجية لتجربة الواجهة — ليست إعلانات حقيقية.</div>
-   </div>
-   <span class="muted" id="resultCount"></span>
-  </div>
-  <div class="cards" id="productCards"></div>
-  <div id="noResults" class="notice hidden">لا توجد نتائج مطابقة. جرّب تغيير البحث أو الولاية.</div>
-  <div class="panel" style="margin-top:18px">
-   <h3>كيف يعمل ميزاني؟</h3>
-   <div class="how">
-    <div><b>1. ابحث</b><br><span class="muted">اختر النوع والولاية.</span></div>
-    <div><b>2. قارن</b><br><span class="muted">تعرّف على عرض التاجر.</span></div>
-    <div><b>3. تواصل</b><br><span class="muted">اتفق مباشرة مع التاجر.</span></div>
-   </div>
-  </div>
- </section>
+<main>
+  <section class="hero" id="home">
+    <div class="container hero-content">
+      <div>
+        <span class="tag">منصة جزائرية متخصصة</span>
+        <h1>ميزانك عندنا</h1>
+        <p>
+          تبحث عن ميزان مناسب لنشاطك التجاري؟
+          ميزاني يساعدك على الوصول إلى تجار الموازين
+          والتواصل معهم بسهولة.
+        </p>
+        <a class="btn btn-gold" href="#services">اكتشف خدماتنا</a>
+        <a class="btn btn-light" href="#join">انضم كتاجر</a>
+      </div>
 
- <section id="page-merchant" class="hidden">
-  <div class="panel">
-   <h2>فضاء التاجر</h2>
-   <p>هل تبيع الموازين في الجزائر؟ انضم إلى دليل ميزاني ليتمكن الزبائن من العثور على نشاطك التجاري والتواصل معك.</p>
+      <div class="hero-card">
+        <div class="hero-icon">⚖️</div>
+        <h2>ميزاني — Mizani DZ</h2>
+        <p>وجهتك للبحث عن الموازين في الجزائر.</p>
+        <a class="btn btn-gold btn-full" href="#contact">
+          تواصل مع ميزاني
+        </a>
+      </div>
+    </div>
+  </section>
 
-   <div class="notice">
-    <b>الاشتراك: 500 دج شهريًا.</b>
-    <br>لا توجد فترة اشتراك مجانية. يتم تفعيل الاشتراك يدويًا بعد التحقق من وصول الدفع.
-   </div>
+  <section id="services">
+    <div class="container">
+      <div class="section-title">
+        <h2>ماذا نقدم؟</h2>
+        <p>خدمات مخصصة للزبائن وتجار الموازين.</p>
+      </div>
 
-   <h3 style="margin-top:18px">الدفع عبر بريدي موب فقط</h3>
-   <p>قيمة الاشتراك الشهري هي <b>500 دج</b>. استعمل رقم RIP التالي في تطبيق بريدي موب، وتحقق من بيانات المستفيد قبل تأكيد أي تحويل.</p>
+      <div class="grid">
+        <article class="card">
+          <div class="card-icon">🔎</div>
+          <h3>البحث عن الموازين</h3>
+          <p>تعرّف على التجار المشاركين وتواصل معهم للاستفسار عن المنتجات والأسعار.</p>
+        </article>
 
-   <label for="ripNumber"><b>رقم RIP لاستقبال الاشتراكات</b></label>
-   <div class="ripbox">
-    <input id="ripNumber" value="00799999001220391835" readonly dir="ltr" aria-label="رقم RIP">
-    <button class="btn primary" type="button" id="copyRipBtn">نسخ رقم RIP</button>
-   </div>
-   <div id="copyStatus" class="success" aria-live="polite"></div>
+        <article class="card">
+          <div class="card-icon">🏪</div>
+          <h3>فضاء التاجر</h3>
+          <p>فرصة للتاجر للتعريف بنشاطه ومنتجاته ومعلومات التواصل الخاصة به.</p>
+        </article>
 
-   <div class="notice">
-    إذا لم يقبل تطبيق بريدي موب الرقم أو ظهرت بيانات مستفيد غير مطابقة، لا تُكمل التحويل قبل التأكد من صحة بيانات الحساب.
-   </div>
+        <article class="card">
+          <div class="card-icon">📲</div>
+          <h3>تواصل مباشر</h3>
+          <p>التواصل عبر واتساب للاستفسارات وإرسال طلبات الاشتراك وإثبات الدفع.</p>
+        </article>
+      </div>
+    </div>
+  </section>
 
-   <h3 style="margin-top:18px">الخطوة الأولى: طلب الانضمام</h3>
-   <p>املأ استمارة الانضمام ببيانات محلك ورقم هاتفك قبل الدفع.</p>
-   <a class="btn teal full" href="https://docs.google.com/forms/d/e/1FAIpQLSf2_y0S3Z6-BTXEED1V1GVrpkM5J2fSp7CDuL0ZL-zjBMrheg/viewform?usp=dialog" target="_blank" rel="noopener">
-    ملء استمارة انضمام التاجر
-   </a>
+  <section id="merchants" style="background:#edf1e9">
+    <div class="container">
+      <div class="section-title">
+        <h2>للتجار الراغبين في الانضمام</h2>
+        <p>عرّف الزبائن بنشاطك عبر منصة ميزاني.</p>
+      </div>
 
-   <h3 style="margin-top:20px">الخطوة الثانية: إثبات الدفع</h3>
-   <ol>
-    <li>حوّل مبلغ 500 دج عبر بريدي موب بعد التحقق من بيانات المستفيد.</li>
-    <li>احتفظ بإيصال التحويل.</li>
-    <li>جهّز إثبات الدفع مع اسم المحل ورقم الهاتف.</li>
-    <li>يُفعّل الاشتراك لمدة شهر بعد التحقق اليدوي من وصول المبلغ.</li>
-   </ol>
-   <div class="notice">
-    <b>تنبيه:</b> لم تتم إضافة وسيلة تواصل لإرسال إثبات الدفع بعد. يجب تحديد رقم واتساب أو بريد إلكتروني خاص بالمشروع وإضافته هنا قبل استقبال اشتراكات التجار.
-   </div>
-  </div>
+      <div class="grid">
+        <article class="card">
+          <h3>اشتراك التاجر</h3>
+          <div class="price">500 <small>دج / شهر</small></div>
+          <p>اشتراك شهري مدفوع لنشر إعلان التاجر بعد مراجعة الطلب والتحقق من الدفع.</p>
+          <ul>
+            <li>إدراج معلومات النشاط التجاري.</li>
+            <li>التعريف بأنواع الموازين المتوفرة.</li>
+            <li>تسهيل تواصل الزبائن مع التاجر.</li>
+          </ul>
+          <a href="#join" class="btn btn-green btn-full">طلب الاشتراك</a>
+        </article>
 
-  <div class="panel">
-   <h3>شروط الاشتراك</h3>
-   <ul>
-    <li>الاشتراك مدفوع: 500 دج شهريًا.</li>
-    <li>لا توجد فترة تجريبية مجانية.</li>
-    <li>إرسال الاستمارة لا يعني أن الاشتراك قد تم تفعيله.</li>
-    <li>تأكيد الدفع وتفعيل الاشتراك يتمان يدويًا.</li>
-    <li>العروض المعروضة حاليًا أمثلة توضيحية وليست إعلانات حقيقية.</li>
-   </ul>
-  </div>
- </section>
+        <article class="card">
+          <h3>كيف تنضم؟</h3>
+          <ol class="steps">
+            <li>املأ استمارة طلب الانضمام.</li>
+            <li>انتظر مراجعة بياناتك.</li>
+            <li>ادفع 500 دج عبر بريدي موب بعد التأكد من بيانات الدفع.</li>
+            <li>أرسل إثبات الدفع عبر واتساب.</li>
+            <li>انتظر تأكيد التفعيل.</li>
+          </ol>
+        </article>
 
- <section id="page-admin" class="hidden">
-  <div class="panel">
-   <h2>متابعة طلبات التجار</h2>
-   <p>طلبات الانضمام تُجمع عبر استمارة Google Forms، وليست مخزنة داخل الموقع نفسه.</p>
-   <a class="btn primary full" href="https://docs.google.com/forms/d/e/1FAIpQLSf2_y0S3Z6-BTXEED1V1GVrpkM5J2fSp7CDuL0ZL-zjBMrheg/viewform?usp=dialog" target="_blank" rel="noopener">
-    فتح استمارة التاجر
-   </a>
-   <p class="muted">لمراجعة الردود، افتح جدول Google Sheets المرتبط بالاستمارة من حساب Google الذي أنشأها.</p>
+        <article class="card">
+          <h3>قبل الدفع</h3>
+          <p>يرجى إرسال طلب الانضمام أولًا وانتظار تأكيد معلومات الاشتراك.</p>
+          <div class="notice">
+            لا ترسل أي مبلغ إضافي. لا يُعدّ الإعلان منشورًا بمجرد التحويل؛
+            التفعيل يتم بعد التحقق اليدوي.
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-   <h3 style="margin-top:18px">طريقة إدارة الاشتراكات</h3>
-   <ol>
-    <li>راجع طلب التاجر في جدول الردود.</li>
-    <li>تحقق من وصول 500 دج إلى حسابك.</li>
-    <li>سجّل تاريخ الدفع وبداية الاشتراك ونهايته في جدول خاص.</li>
-    <li>جدّد الاشتراك بعد التحقق من دفع الشهر التالي.</li>
-   </ol>
-   <div class="notice">هذه الصفحة ليست لوحة إدارة آمنة. لا تعرض بيانات الدفع أو حالة الاشتراك تلقائيًا، ولا يفعّل الموقع التجار آليًا.</div>
-  </div>
- </section>
+  <section id="join">
+    <div class="container">
+      <div class="section-title">
+        <h2>طلب انضمام تاجر</h2>
+        <p>املأ الاستمارة الرسمية التالية لإرسال بياناتك.</p>
+      </div>
+
+      <div class="card" style="max-width:650px;margin:auto">
+        <p>
+          استخدم استمارة ميزاني لتقديم معلومات نشاطك التجاري.
+          بعد الإرسال، يمكنك التواصل معنا عبر واتساب.
+        </p>
+
+        <a
+          class="btn btn-green btn-full"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSf2_y0S3Z6-BTXEED1V1GVrpkM5J2fSp7CDuL0ZL-zjBMrheg/viewform?usp=dialog"
+          target="_blank"
+          rel="noopener noreferrer">
+          📝 فتح استمارة طلب الانضمام
+        </a>
+
+        <p class="muted">
+          إذا لم تفتح الاستمارة، تحقق من اتصال الإنترنت أو أعد المحاولة.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="payment" style="background:#edf1e9">
+    <div class="container">
+      <div class="section-title">
+        <h2>الدفع عبر بريدي موب</h2>
+        <p>قيمة الاشتراك الشهري: 500 دج.</p>
+      </div>
+
+      <div class="card" style="max-width:650px;margin:auto">
+        <div class="notice">
+          مهم: تحقق من صحة رقم RIP واسم المستفيد الظاهر داخل تطبيق بريدي موب
+          قبل تأكيد أي تحويل. لا تدفع إذا كانت بيانات المستفيد غير مطابقة.
+        </div>
+
+        <h3 style="margin-top:22px">رقم RIP للتحويل</h3>
+
+        <div class="rip" id="ripNumber">00799999001220391835</div>
+
+        <button type="button" class="btn btn-green btn-full" id="copyRip">
+          📋 نسخ رقم RIP
+        </button>
+
+        <p id="copyStatus" class="muted" aria-live="polite"></p>
+
+        <hr style="border:0;border-top:1px solid var(--border);margin:24px 0">
+
+        <h3>بعد الدفع</h3>
+        <ol class="steps">
+          <li>أكمل طلب الانضمام أولًا.</li>
+          <li>تأكد من بيانات المستفيد قبل التحويل.</li>
+          <li>احتفظ بإيصال العملية.</li>
+          <li>أرسل صورة إثبات الدفع عبر واتساب.</li>
+          <li>انتظر تأكيد استلام الدفع وتفعيل الإعلان.</li>
+        </ol>
+
+        <a
+          class="btn btn-whatsapp btn-full"
+          href="https://wa.me/213557619186?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D9%83%20%D9%81%D9%8A%20%D9%85%D9%86%D8%B5%D8%A9%20%D9%85%D9%8A%D8%B2%D8%A7%D9%86%D9%8A%20%D9%83%D8%AA%D8%A7%D8%AC%D8%B1%20%D9%85%D9%88%D8%A7%D8%B2%D9%8A%D9%86.%20%D9%87%D8%B0%D8%A7%20%D8%A5%D8%AB%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AF%D9%81%D8%B9%20%D9%84%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D9%83%20%D8%A7%D9%84%D8%B4%D9%87%D8%B1%D9%8A%20%D8%A8%D9%82%D9%8A%D9%85%D8%A9%20500%20%D8%AF%D8%AC."
+          target="_blank"
+          rel="noopener noreferrer">
+          🟢 إرسال إثبات الدفع عبر واتساب
+        </a>
+
+        <p class="muted">
+          سيفتح واتساب محادثة مع رسالة جاهزة. أرفق صورة الإيصال داخل المحادثة
+          ثم أرسلها بنفسك. لا تُرسل كلمة مرور أو رمز تحقق أو بيانات سرية.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="examples">
+    <div class="container">
+      <div class="section-title">
+        <h2>مساحة عرض التجار</h2>
+        <p>سيتم عرض التجار الذين جرى التحقق من بياناتهم وتفعيل اشتراكاتهم.</p>
+      </div>
+
+      <div class="card">
+        <span class="demo-label">قيد التجهيز</span>
+        <h3 style="margin-top:12px">لا توجد إعلانات تجار مفعّلة بعد</h3>
+        <p>
+          هذه المساحة مخصصة لإعلانات التجار المشاركين.
+          لن نعرض أسماء أو أرقام تجار على أنها حقيقية دون موافقتهم والتحقق من بياناتهم.
+        </p>
+        <a href="#join" class="btn btn-green">كن أول تاجر ينضم إلى ميزاني</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq">
+    <div class="container">
+      <div class="section-title">
+        <h2>الأسئلة الشائعة</h2>
+      </div>
+
+      <details>
+        <summary>كم يبلغ اشتراك التاجر؟</summary>
+        <p>500 دج شهريًا، وفق آلية الاشتراك المعلنة في المنصة.</p>
+      </details>
+
+      <details>
+        <summary>هل يتم تفعيل الإعلان تلقائيًا بعد الدفع؟</summary>
+        <p>لا. يجب مراجعة الطلب والتحقق من وصول المبلغ ثم تفعيل الإعلان يدويًا.</p>
+      </details>
+
+      <details>
+        <summary>كيف أرسل إثبات الدفع؟</summary>
+        <p>اضغط زر إرسال إثبات الدفع عبر واتساب، ثم أرفق صورة الإيصال وأرسلها.</p>
+      </details>
+
+      <details>
+        <summary>هل يضمن الموقع شراء الميزان؟</summary>
+        <p>
+          المنصة وسيلة للتواصل بين الزبون والتاجر، ولا تضمن إتمام البيع.
+          على الطرفين التحقق من المنتج والسعر وشروط المعاملة.
+        </p>
+      </details>
+    </div>
+  </section>
+
+  <section id="contact" style="background:#edf1e9">
+    <div class="container">
+      <div class="section-title">
+        <h2>تواصل معنا</h2>
+        <p>للاستفسارات وطلبات الانضمام وإثبات الدفع.</p>
+      </div>
+
+      <div class="card" style="max-width:550px;margin:auto;text-align:center">
+        <div class="card-icon">💬</div>
+        <h3>ميزاني على واتساب</h3>
+        <p>رقم التواصل: +213 557 619 186</p>
+        <a
+          class="btn btn-whatsapp btn-full"
+          href="https://wa.me/213557619186?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D9%85%D9%8A%D8%B2%D8%A7%D9%86%D9%8A."
+          target="_blank"
+          rel="noopener noreferrer">
+          فتح واتساب
+        </a>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>
- <div class="wrap">
-  <b>ميزاني — ميزانك عندنا</b><br>
-  دليل أولي للموازين في الجزائر. عروض المنتجات المعروضة أمثلة توضيحية. الاشتراك 500 دج شهريًا عبر بريدي موب باستخدام رقم RIP المعروض في فضاء التاجر، ويُفعّل يدويًا بعد التحقق من الدفع.
- </div>
+  <div class="container">
+    <div class="brand" style="justify-content:center">
+      <span class="logo">⚖</span>
+      <span>ميزاني</span>
+    </div>
+
+    <p>ميزانك عندنا — منصة للتواصل بين الزبائن وتجار الموازين في الجزائر.</p>
+
+    <div class="footer-links">
+      <a href="#home">الرئيسية</a>
+      <a href="#join">انضم كتاجر</a>
+      <a href="#payment">الدفع</a>
+      <a href="#contact">اتصل بنا</a>
+    </div>
+
+    <p class="small">
+      © <span id="year"></span> ميزاني. جميع الحقوق محفوظة.
+    </p>
+  </div>
 </footer>
 
+<a
+  class="btn btn-whatsapp floating-wa"
+  href="https://wa.me/213557619186"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="التواصل مع ميزاني عبر واتساب">
+  واتساب
+</a>
+
 <script>
-const RIP_NUMBER = "00799999001220391835";
+  document.getElementById("year").textContent =
+    new Date().getFullYear();
 
-const sampleProducts = [
- {id:1,name:"ميزان إلكتروني تجاري",type:"ميزان إلكتروني",wilaya:"الجزائر",icon:"⚖️",description:"نموذج لميزان إلكتروني للمحلات"},
- {id:2,name:"ميزان صناعي للأوزان الكبيرة",type:"ميزان صناعي",wilaya:"سطيف",icon:"🏭",description:"نموذج لميزان للاستعمال الصناعي"},
- {id:3,name:"ميزان حساس للمخابر",type:"ميزان حساس",wilaya:"وهران",icon:"🔬",description:"نموذج لميزان دقيق"},
- {id:4,name:"ميزان تجاري مع شاشة",type:"ميزان تجاري",wilaya:"البليدة",icon:"🛒",description:"نموذج لميزان محل تجاري"},
- {id:5,name:"ميزان إلكتروني للمحلات",type:"ميزان إلكتروني",wilaya:"الجزائر",icon:"🏪",description:"نموذج لميزان للبيع بالتجزئة"},
- {id:6,name:"ميزان شاحنات",type:"ميزان شاحنات",wilaya:"قسنطينة",icon:"🚚",description:"نموذج لميزان أوزان كبيرة"}
-];
+  document.getElementById("copyRip").addEventListener("click", async function () {
+    const rip = document.getElementById("ripNumber").textContent.trim();
+    const status = document.getElementById("copyStatus");
 
-const $ = id => document.getElementById(id);
+    try {
+      await navigator.clipboard.writeText(rip);
+      status.textContent = "تم نسخ رقم RIP. تحقق منه قبل التحويل.";
+    } catch (error) {
+      const field = document.createElement("textarea");
+      field.value = rip;
+      field.setAttribute("readonly", "");
+      field.style.position = "fixed";
+      field.style.opacity = "0";
+      document.body.appendChild(field);
+      field.select();
 
-function renderProducts(){
- const q = $("q").value.trim().toLowerCase();
- const type = $("type").value;
- const wilaya = $("wilaya").value;
+      const copied = document.execCommand("copy");
+      document.body.removeChild(field);
 
- const items = sampleProducts.filter(p =>
-  (!q || (p.name+" "+p.description+" "+p.type).toLowerCase().includes(q)) &&
-  (!type || p.type === type) &&
-  (!wilaya || p.wilaya === wilaya)
- );
-
- $("productCards").innerHTML = items.map(p => `
-  <article class="card">
-   <div class="visual">${p.icon}</div>
-   <div class="cardbody">
-    <span class="pill">${p.type}</span>
-    <h3>${p.name}</h3>
-    <div class="price">السعر عند التاجر</div>
-    <div class="muted">📍 ${p.wilaya}</div>
-    <p class="muted">${p.description}</p>
-    <button class="btn primary contactBtn">طلب معلومات عن المنتج</button>
-   </div>
-  </article>
- `).join("");
-
- $("resultCount").textContent = "العروض الظاهرة: " + items.length;
- $("noResults").classList.toggle("hidden", items.length > 0);
-
- document.querySelectorAll(".contactBtn").forEach(b => {
-  b.onclick = () => alert("هذا عرض تجريبي وليس لدى ميزاني تاجر مسجل بعد. سنضيف بيانات التواصل الحقيقية بعد موافقة التجار.");
- });
-}
-
-function showPage(page){
- ["customer","merchant","admin"].forEach(p => {
-  $("page-"+p).classList.toggle("hidden", p !== page);
- });
- document.querySelectorAll(".navbtn").forEach(b => {
-  b.classList.toggle("active", b.dataset.page === page);
- });
- $("hero").classList.toggle("hidden", page !== "customer");
- window.scrollTo({top:0,behavior:"smooth"});
-}
-
-document.querySelectorAll(".navbtn").forEach(b => {
- b.addEventListener("click", () => showPage(b.dataset.page));
-});
-
-$("searchBtn").onclick = renderProducts;
-$("q").addEventListener("keydown", e => {
- if(e.key === "Enter") renderProducts();
-});
-$("type").onchange = renderProducts;
-$("wilaya").onchange = renderProducts;
-
-$("copyRipBtn").addEventListener("click", async () => {
- const status = $("copyStatus");
- const field = $("ripNumber");
-
- try {
-  if (navigator.clipboard && window.isSecureContext) {
-   await navigator.clipboard.writeText(RIP_NUMBER);
-   status.textContent = "تم نسخ رقم RIP. يمكنك لصقه في بريدي موب.";
-  } else {
-   field.focus();
-   field.select();
-   field.setSelectionRange(0, field.value.length);
-   const copied = document.execCommand("copy");
-   status.textContent = copied
-    ? "تم نسخ رقم RIP."
-    : "تم تحديد الرقم؛ اضغط نسخ من هاتفك.";
-  }
- } catch (error) {
-  field.focus();
-  field.select();
-  field.setSelectionRange(0, field.value.length);
-  status.textContent = "تم تحديد الرقم؛ انسخه ثم الصقه في بريدي موب.";
- }
-});
-
-renderProducts();
+      status.textContent = copied
+        ? "تم نسخ رقم RIP. تحقق منه قبل التحويل."
+        : "تعذر النسخ تلقائيًا. اضغط مطولًا على رقم RIP وانسخه.";
+    }
+  });
 </script>
+
 </body>
 </html>
