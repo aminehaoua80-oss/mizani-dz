@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>فضاء التاجر | ميزاني</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f1f5f7;color:#17384a;margin:0}
+header{background:#123c55;color:white;text-align:center;padding:22px}
+main{max-width:600px;margin:auto;padding:15px}
+.card{background:white;border-radius:12px;padding:18px;margin:14px 0}
+input,button{box-sizing:border-box;width:100%;padding:13px;margin:7px 0;border-radius:8px;font-size:16px}
+input{border:1px solid #ccd6dd}
+button{border:0;background:#176b54;color:white;font-weight:bold}
+.secondary{background:#31566b}
+.note{background:#edf5f2;padding:12px;border-radius:8px;overflow-wrap:anywhere}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<header>
+<h1>ميزاني</h1>
+<p>فضاء التاجر — ميزانك عندنا</p>
+</header>
+<main>
+<section class="card" id="authBox">
+<h2>الدخول إلى فضاء التاجر</h2>
+<input id="email" type="email" placeholder="البريد الإلكتروني">
+<input id="password" type="password" placeholder="كلمة المرور">
+<button onclick="login()">تسجيل الدخول</button>
+<button class="secondary" onclick="register()">إنشاء حساب تاجر</button>
+<p id="authMessage"></p>
+</section>
+
+<section class="card hidden" id="space">
+<h2>مرحبًا بك في فضاء التاجر</h2>
+<p id="merchantEmail"></p>
+<p>الاشتراك الشهري: <strong>500 دج</strong></p>
+
+<div class="note">
+<h3>الدفع عبر RIP</h3>
+<p>رقم RIP:</p>
+<p><strong id="rip">00799999001220391835</strong></p>
+<button class="secondary" onclick="copyRIP()">نسخ رقم RIP</button>
+<p>حوّل مبلغ 500 دج، ثم تواصل معنا عبر واتساب لتأكيد التحويل.</p>
+</div>
+
+<h3>حالة اشتراكك</h3>
+<p id="status">جارٍ تحميل الحالة...</p>
+
+<button onclick="confirmPayment()">تأكيد التحويل عبر واتساب</button>
+<button class="secondary" onclick="logout()">تسجيل الخروج</button>
+<p id="spaceMessage"></p>
+</section>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyB2g8LEJkx0tEMek2wJtOnXc436VT3qeU0",
+  authDomain: "mizani-dz.firebaseapp.com",
+  databaseURL: "https://mizani-dz-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "mizani-dz",
+  storageBucket: "mizani-dz.firebasestorage.app",
+  messagingSenderId: "791266337008",
+  appId: "1:791266337008:web:ccbd3d0468bdd989656235",
+  measurementId: "G-8JGVHX58R0"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.database();
+const ADMIN_EMAIL = "aminehaoua80@gmail.com";
+const RIP = "00799999001220391835";
+const WHATSAPP = "213557619186";
+
+function say(id, text) {
+  document.getElementById(id).textContent = text;
+}
+
+async function login() {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  try {
+    await auth.signInWithEmailAndPassword(email, password);
+    say("authMessage", "");
+  } catch (e) {
+    say("authMessage", "تعذر الدخول. تحقق من البريد وكلمة المرور.");
+  }
+}
+
+async function register() {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  if (password.length < 6) {
+    say("authMessage", "كلمة المرور يجب أن تتكون من 6 أحرف على الأقل.");
+    return;
+  }
+  try {
+    const result = await auth.createUserWithEmailAndPassword(email, password);
+    await db.ref("traders/" + result.user.uid).set({
+      email: result.user.email,
+      subscriptionStatus: "pending",
+      createdAt: new Date().toISOString()
+    });
+    say("authMessage", "تم إنشاء الحساب. اشتراكك ينتظر مراجعة الإدارة.");
+  } catch (e) {
+    say("authMessage", "تعذر إنشاء الحساب. قد يكون البريد مستخدمًا أو إعدادات قاعدة البيانات غير جاهزة.");
+  }
+}
+
+auth.onAuthStateChanged(async user => {
+  const valid = user && user.email &&
+    user.email.toLowerCase() !== ADMIN_EMAIL.toLowerCase();
+
+  document.getElementById("authBox").classList.toggle("hidden", !!valid);
+  document.getElementById("space").classList.toggle("hidden", !valid);
+
+  if (!valid) return;
+
+  say("merchantEmail", user.email);
+  say("status", "جارٍ تحميل الحالة...");
+
+  try {
+    const snap = await db.ref("traders/" + user.uid).once("value");
+    const profile = snap.val();
+
+    if (!profile) {
+      say("status", "لم يُعثر على ملف التاجر. تواصل مع الإدارة.");
+      return;
+    }
+
+    const labels = {
+      pending: "الحساب قيد المراجعة",
+      inactive: "الاشتراك غير مفعّل",
+      active: "الاشتراك مفعّل",
+      expired: "الاشتراك منتهٍ"
+    };
+
+    say("status", labels[profile.subscriptionStatus] ||
+      "حالة الاشتراك: " + profile.subscriptionStatus);
+  } catch (e) {
+    say("status", "تعذر تحميل الحالة. راجع إعدادات أمان Firebase.");
+  }
+});
+
+function copyRIP() {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(RIP)
+      .then(() => say("spaceMessage", "تم نسخ رقم RIP."));
+  } else {
+    say("spaceMessage", "رقم RIP: " + RIP);
+  }
+}
+
+async function confirmPayment() {
+  const user = auth.currentUser;
+  if (!user) return;
+
+  try {
+    await db.ref("paymentRequests/" + user.uid).push({
+      email: user.email,
+      amountDZD: 500,
+      status: "pending_verification",
+      createdAt: new Date().toISOString()
+    });
+
+    const text = "السلام عليكم، أنا التاجر " + user.email +
+      ". قمت بتحويل اشتراك ميزاني بقيمة 500 دج عبر RIP، وأطلب التحقق من التحويل.";
+    const url = "https://wa.me/" + WHATSAPP +
+      "?text=" + encodeURIComponent(text);
+
+    window.open(url, "_blank");
+    say("spaceMessage", "سُجل طلب التحقق. لن يُفعّل الاشتراك إلا بعد تأكيد الإدارة.");
+  } catch (e) {
+    say("spaceMessage", "تعذر تسجيل طلب التحقق. تواصل مع الإدارة عبر واتساب.");
+    window.open("https://wa.me/" + WHATSAPP, "_blank");
+  }
+}
+
+async function logout() {
+  await auth.signOut();
+}
+</script>
+</body>
+</html>
