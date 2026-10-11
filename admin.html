@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>لوحة إدارة ميزاني</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f2f6f3;margin:0;padding:18px;color:#183b2b}
+main{max-width:900px;margin:auto}
+section{background:white;padding:20px;margin:14px 0;border-radius:14px;box-shadow:0 2px 8px #0001}
+h1,h2{color:#176b45}
+input,button{box-sizing:border-box;width:100%;padding:12px;margin:7px 0;border-radius:8px;font-size:16px}
+input{border:1px solid #ccd8cf}
+button{background:#176b45;color:white;border:0;font-weight:bold}
+.secondary{background:#e5f1e9;color:#176b45}
+.hidden{display:none}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f7f5;padding:12px;border-radius:8px;direction:ltr;text-align:left}
+.status{padding:10px;background:#edf5ef;border-radius:8px;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<section>
+<h1>ميزاني — لوحة الإدارة</h1>
+<p>إدارة التجار والاشتراكات ومراجعة البيانات.</p>
+</section>
+
+<section id="loginPanel">
+<h2>دخول الإدارة</h2>
+<form id="loginForm">
+<label for="email">البريد الإلكتروني</label>
+<input id="email" type="email" value="aminehaoua80@gmail.com" required>
+<label for="password">كلمة المرور</label>
+<input id="password" type="password" autocomplete="current-password" required>
+<button type="submit">تسجيل الدخول</button>
+</form>
+<p id="loginStatus" class="status">أدخل كلمة مرور حساب الإدارة في Firebase.</p>
+</section>
+
+<div id="dashboard" class="hidden">
+<section>
+<h2>مرحبًا بك في لوحة الإدارة</h2>
+<p id="account"></p>
+<button id="refresh" class="secondary" type="button">تحديث البيانات</button>
+<button id="logout" type="button">تسجيل الخروج</button>
+<p id="status" class="status">جاهز.</p>
+</section>
+
+<section>
+<h2>التجار المنشورون للزبائن</h2>
+<pre id="publicData">لم يتم التحميل.</pre>
+</section>
+
+<section>
+<h2>البيانات الخاصة بالتجار</h2>
+<pre id="privateData">لم يتم التحميل.</pre>
+</section>
+
+<section>
+<h2>الاشتراكات والمدفوعات</h2>
+<pre id="paymentData">لم يتم التحميل.</pre>
+</section>
+</div>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyB2g8LEJkx0tEMek2wJtOnXc436VT3qeU0",
+  authDomain: "mizani-dz.firebaseapp.com",
+  databaseURL: "https://mizani-dz-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "mizani-dz",
+  storageBucket: "mizani-dz.firebasestorage.app",
+  messagingSenderId: "791266337008",
+  appId: "1:791266337008:web:ccbd3d0468bdd989656235",
+  measurementId: "G-8JGVHX58R0"
+};
+
+const ADMIN_EMAIL = "aminehaoua80@gmail.com";
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const db = firebase.database();
+
+const el = id => document.getElementById(id);
+
+function message(id, text) {
+  el(id).textContent = text;
+}
+
+async function readData(path, target) {
+  try {
+    const snapshot = await db.ref(path).get();
+    el(target).textContent = snapshot.exists()
+      ? JSON.stringify(snapshot.val(), null, 2)
+      : "لا توجد بيانات حاليًا.";
+    return true;
+  } catch (error) {
+    el(target).textContent =
+      "تعذر تحميل البيانات: " + error.message;
+    return false;
+  }
+}
+
+async function loadData() {
+  message("status", "جارٍ تحميل البيانات...");
+  const results = await Promise.all([
+    readData("publicMerchants", "publicData"),
+    readData("privateMerchants", "privateData"),
+    readData("payments", "paymentData")
+  ]);
+
+  message(
+    "status",
+    results.every(Boolean)
+      ? "انتهى تحديث البيانات."
+      : "تعذر تحميل بعض البيانات. راجع رسائل الخطأ."
+  );
+}
+
+auth.onAuthStateChanged(user => {
+  const allowed =
+    user && user.email &&
+    user.email.toLowerCase() === ADMIN_EMAIL;
+
+  el("loginPanel").classList.toggle("hidden", !!allowed);
+  el("dashboard").classList.toggle("hidden", !allowed);
+
+  if (user && !allowed) {
+    auth.signOut();
+    message("loginStatus", "هذا الحساب غير مصرح له بالدخول.");
+    return;
+  }
+
+  if (allowed) {
+    message("account", "الحساب: " + user.email);
+    loadData();
+  }
+});
+
+el("loginForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  const email = el("email").value.trim().toLowerCase();
+  const password = el("password").value;
+
+  if (email !== ADMIN_EMAIL) {
+    message("loginStatus", "استعمل بريد الإدارة الصحيح.");
+    return;
+  }
+
+  message("loginStatus", "جارٍ التحقق من الحساب...");
+
+  try {
+    await auth.signInWithEmailAndPassword(email, password);
+    el("password").value = "";
+  } catch (error) {
+    message("loginStatus", "فشل الدخول: " + error.message);
+  }
+});
+
+el("refresh").addEventListener("click", loadData);
+el("logout").addEventListener("click", () => auth.signOut());
+</script>
+</body>
+</html>
